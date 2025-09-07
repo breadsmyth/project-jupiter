@@ -13,10 +13,8 @@ DEFAULT_CONFIG = {
 def load():
     if not os.path.exists(CONFIG_PATH):
         # create the default config
-        config_toml = toml.dumps(DEFAULT_CONFIG)
-
         with open(CONFIG_PATH, 'w') as file:
-            file.write(config_toml)
+            toml.dump(DEFAULT_CONFIG, file)
     
     # load config
     config_dict = toml.load(CONFIG_PATH)
