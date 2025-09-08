@@ -1,5 +1,6 @@
 import pygame
 
+import audio
 import constants
 import event
 import gamestate
@@ -18,6 +19,7 @@ if gamestate.config['fullscreen']:
 
 # initialize pygame
 pygame.init()
+pygame.mixer.init()
 screen = pygame.display.set_mode(resolution, display_flags)
 pygame.display.set_caption(constants.TITLE)
 
@@ -26,6 +28,7 @@ pygame.mouse.set_visible(False)
 clock = pygame.time.Clock()
 
 # initialize everything else
+audio.init()
 event.init()
 
 

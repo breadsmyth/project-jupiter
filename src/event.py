@@ -1,6 +1,6 @@
 import pygame
 
-import constants
+import audio
 import gamestate
 import sprite
 
@@ -32,6 +32,11 @@ def handle(events):
 
         elif event.type == pygame.KEYUP:
             keys_pressed[event.key] = False
+        
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # temp code
+            if event.button == 1:
+                audio.play('blip.ogg')
         
         elif event.type == pygame.MOUSEWHEEL:
             scroll_direction = event.y  # 1 or -1
