@@ -1,20 +1,19 @@
 import pygame
 
-import config
 import constants
 import event
 import gamestate
 
 
-# load config
-config_dict = config.load()
+# load gamestate
+gamestate.init()
 
 resolution = constants.RESOLUTION
-if config_dict['hidpi']:
+if gamestate.config['hidpi']:
     resolution = tuple(value * 2 for value in resolution)
 
 display_flags = 0
-if config_dict['fullscreen']:
+if gamestate.config['fullscreen']:
     display_flags |= pygame.FULLSCREEN
 
 # initialize pygame
@@ -27,7 +26,6 @@ pygame.mouse.set_visible(False)
 clock = pygame.time.Clock()
 
 # initialize everything else
-gamestate.init()
 event.init()
 
 
