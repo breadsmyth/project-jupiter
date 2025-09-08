@@ -2,10 +2,16 @@ import pygame
 
 import constants
 import gamestate
+import sprite
 
 
 
 keys_pressed = {}
+
+def draw_cursor(screen):
+    mouse_pos = pygame.mouse.get_pos()
+    screen.blit(cursor_img, mouse_pos)
+
 
 def handle(events):
     for event in events:
@@ -24,6 +30,11 @@ def handle(events):
         
         elif event.type == pygame.MOUSEWHEEL:
             scroll_direction = event.y  # 1 or -1
+
+
+def init():
+    global cursor_img
+    cursor_img = sprite.load('cursor.png')
 
 
 def is_pressed(key):
