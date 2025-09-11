@@ -7,6 +7,12 @@ current_hash = subprocess.run(
     text=True).stdout[:-1]
 
 
+class Color:
+    BG = (30, 30, 46)
+    FG = (205, 214, 244)
+    BLUE = (116, 199, 236)
+    BLACK = (24, 24, 37)
+
 FPS = 30
 RESOLUTION = (800, 800)
 TITLE = f'Project Juptier ({current_hash})'

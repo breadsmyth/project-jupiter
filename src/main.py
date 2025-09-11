@@ -4,6 +4,7 @@ import audio
 import constants
 import event
 import gamestate
+import text
 
 
 # load gamestate
@@ -30,14 +31,19 @@ clock = pygame.time.Clock()
 # initialize everything else
 audio.init()
 event.init()
+text.init()
 
+
+# Test code
+title_surf = text.write('Project Juptier', 200)
 
 # main window loop
 while gamestate.running:
-    screen.fill((20, 20, 40))
+    screen.fill(constants.Color.BG)
 
     event.handle(pygame.event.get())
 
+    screen.blit(title_surf, (100, 100))
     event.draw_cursor(screen)
 
     pygame.display.flip()
