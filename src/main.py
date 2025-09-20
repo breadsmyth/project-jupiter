@@ -3,7 +3,7 @@ import pygame
 import audio
 import constants
 import event
-import game_context
+import context
 import gamestate
 import text
 
@@ -36,7 +36,7 @@ audio.init()
 event.init()
 text.init()
 
-game_context.init()
+context.init()
 
 
 # Test code

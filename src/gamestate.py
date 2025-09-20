@@ -1,5 +1,5 @@
 from config import load as load_config
-import game_context
+import context
 
 
 def init():
@@ -7,7 +7,7 @@ def init():
     config = load_config()
 
     global current_context
-    current_context = game_context.title_screen
+    current_context = context.title_screen
 
     global running
     running = True
