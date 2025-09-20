@@ -15,4 +15,6 @@ class Color:
 
 FPS = 30
 RESOLUTION = (800, 800)
-TITLE = f'Project Juptier ({current_hash})'
+TITLE = 'Project Jupiter'
+WINDOW_SCALE = 1
+WINDOW_TITLE = f'{TITLE} ({current_hash})'

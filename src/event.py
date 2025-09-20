@@ -9,12 +9,7 @@ import sprite
 keys_pressed = {}
 
 def draw_cursor(screen):
-    offset_amt = 6  # cursor image is 11x11 px
-    if gamestate.config['hidpi']:
-        offset_amt *= 2
-
     mouse_pos = pygame.mouse.get_pos()
-    mouse_pos = tuple(pos - offset_amt for pos in mouse_pos)
     screen.blit(cursor_img, mouse_pos)
 
 

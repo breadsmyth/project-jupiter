@@ -3,6 +3,7 @@ import pygame
 import audio
 import constants
 import event
+import game_context
 import gamestate
 import text
 
@@ -10,9 +11,11 @@ import text
 # load gamestate
 gamestate.init()
 
-resolution = constants.RESOLUTION
 if gamestate.config['hidpi']:
-    resolution = tuple(value * 2 for value in resolution)
+    constants.RESOLUTION = tuple(value * 2 for value in constants.RESOLUTION)
+    constants.WINDOW_SCALE *= 2
+
+resolution = constants.RESOLUTION
 
 display_flags = 0
 if gamestate.config['fullscreen']:
@@ -22,7 +25,7 @@ if gamestate.config['fullscreen']:
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode(resolution, display_flags)
-pygame.display.set_caption(constants.TITLE)
+pygame.display.set_caption(constants.WINDOW_TITLE)
 
 pygame.mouse.set_visible(False)
 
@@ -33,9 +36,10 @@ audio.init()
 event.init()
 text.init()
 
+game_context.init()
+
 
 # Test code
-title_surf = text.write('Project Juptier', 200)
 
 # main window loop
 while gamestate.running:
@@ -43,7 +47,8 @@ while gamestate.running:
 
     event.handle(pygame.event.get())
 
-    screen.blit(title_surf, (100, 100))
+    gamestate.current_context(screen)
+
     event.draw_cursor(screen)
 
     pygame.display.flip()
