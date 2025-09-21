@@ -2,10 +2,10 @@ import pygame
 
 import audio
 import constants
+import draw.text
 import event
 import context
 import gamestate
-import text
 
 
 # load gamestate
@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 # initialize everything else
 audio.init()
 event.init()
-text.init()
+draw.text.init()
 
 context.init()
 

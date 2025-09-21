@@ -12,6 +12,7 @@ class Color:
     FG = (205, 214, 244)
     BLUE = (116, 199, 236)
     BLACK = (24, 24, 37)
+    WHITE = (255, 255, 255)
 
 FPS = 30
 RESOLUTION = (800, 800)
