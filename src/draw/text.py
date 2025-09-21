@@ -21,6 +21,7 @@ class Text:
             size=size)
         
         self.width, self.height = self.surf.get_size()
+        self.text = text
     
     def draw(self, surf, pos):
         surf.blit(self.surf, pos)
