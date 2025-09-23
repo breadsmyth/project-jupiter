@@ -7,6 +7,14 @@ class Text_Button:
     def __init__(self, text_surf, pos, size):
         'Construct a textbutton where the button has'
         'position `pos` and size `size`'
+
+        # account for hidpi
+        size = (
+            size[0] * constants.WINDOW_SCALE,
+            size[1] * constants.WINDOW_SCALE)
+        pos = (
+            pos[0] * constants.WINDOW_SCALE,
+            pos[1] * constants.WINDOW_SCALE)
         
         # First, verify the text will fit in the size
         if text_surf.width > size[0]:

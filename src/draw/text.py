@@ -15,6 +15,9 @@ def init():
 
 class Text:
     def __init__(self, text, size, color=constants.Color.FG):
+        # account for hidpi
+        size *= constants.WINDOW_SCALE
+
         self.surf, _ = font.render(
             text,
             color,
@@ -24,4 +27,9 @@ class Text:
         self.text = text
     
     def draw(self, surf, pos):
+        # account for hidpi
+        pos = (
+            pos[0] * constants.WINDOW_SCALE,
+            pos[1] * constants.WINDOW_SCALE)
+
         surf.blit(self.surf, pos)
