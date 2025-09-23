@@ -3,6 +3,8 @@ import pygame
 import constants
 
 
+border_width = 10 * constants.WINDOW_SCALE
+
 class Text_Button:
     def __init__(self, text_surf, pos, size):
         'Construct a textbutton where the button has'
@@ -16,7 +18,7 @@ class Text_Button:
             pos[0] * constants.WINDOW_SCALE,
             pos[1] * constants.WINDOW_SCALE)
         
-        # First, verify the text will fit in the size
+        # verify the text will fit in the size
         if text_surf.width > size[0]:
             print(f'WARNING: Text {text_surf.text} too wide to fit in width {size[0]}!')
             size = (text_surf.width, size[1])
@@ -27,10 +29,27 @@ class Text_Button:
         
         # Construct the surface
         self.surf = pygame.Surface(size)
-        self.surf.fill(constants.Color.WHITE)
+        self.surf.fill(constants.Color.FG)
 
+        # add an inner box
+        inner_size = tuple(dim - (border_width * 2) for dim in self.surf.get_size())
+        self.inner_surf = pygame.Surface(inner_size)
+
+        self.text_surf = text_surf
         self.pos = pos
+
+        # calculate text position
+        self.text_pos = (
+            pos[0] + (size[0] - text_surf.width) // 2,
+            pos[1] + (size[1] - text_surf.height) // 2)
     
     def draw(self, surf):
         'Blit this button to surf'
+        
+        self.inner_surf.fill(constants.Color.BG)
+
         surf.blit(self.surf, self.pos)
+        surf.blit(self.inner_surf,
+                  tuple(dim + border_width for dim in self.pos))
+        
+        surf.blit(self.text_surf.surf, self.text_pos)
