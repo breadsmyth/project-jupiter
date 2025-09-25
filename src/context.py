@@ -6,7 +6,7 @@ import draw.text
 def init():
     global START_BTN
     START_TEXT = draw.text.Text('Start', 50)
-    START_BTN = draw.button.Text_Button(START_TEXT, (100, 400), (500, 50))
+    START_BTN = draw.button.Text_Button(START_TEXT, (100, 400), (500, 50), lambda: print('Hi'))
 
     global TITLE_TEXT
     TITLE_TEXT = draw.text.Text(constants.TITLE, 100)

@@ -10,8 +10,10 @@ current_hash = subprocess.run(
 class Color:
     BG = (30, 30, 46)
     FG = (205, 214, 244)
-    BLUE = (116, 199, 236)
+    ACTIVE = (64, 50, 77)
+
     BLACK = (24, 24, 37)
+    BLUE = (116, 199, 236)
     PURPLE = (203, 166, 247)
     WHITE = (255, 255, 255)
 

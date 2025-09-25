@@ -6,7 +6,7 @@ import constants
 border_width = 10 * constants.WINDOW_SCALE
 
 class Text_Button:
-    def __init__(self, text_surf, pos, size):
+    def __init__(self, text_surf, pos, size, event):
         'Construct a textbutton where the button has'
         'position `pos` and size `size`'
 
@@ -37,19 +37,31 @@ class Text_Button:
 
         self.text_surf = text_surf
         self.pos = pos
+        self.event = event
 
         # calculate text position
         self.text_pos = (
             pos[0] + (size[0] - text_surf.width) // 2,
             pos[1] + (size[1] - text_surf.height) // 2)
+
+        # calculate bounding rect
+        self.rect = self.surf.get_rect().move(*pos)
     
     def draw(self, surf):
         'Blit this button to surf'
         
-        self.inner_surf.fill(constants.Color.BG)
+        bg_color = constants.Color.BG
+        if self.is_moused():
+            bg_color = constants.Color.ACTIVE
+
+        self.inner_surf.fill(bg_color)
 
         surf.blit(self.surf, self.pos)
         surf.blit(self.inner_surf,
                   tuple(dim + border_width for dim in self.pos))
         
         surf.blit(self.text_surf.surf, self.text_pos)
+    
+    def is_moused(self):
+        mouse_pos = pygame.mouse.get_pos()
+        return self.rect.collidepoint(mouse_pos)
