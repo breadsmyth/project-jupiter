@@ -29,9 +29,12 @@ def handle(events):
             keys_pressed[event.key] = False
         
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            # temp code
-            if event.button == 1:
-                audio.play('blip.ogg')
+            if event.button == 1:  # left click
+                # check to see whether the mouse is in a UI button
+                for button in gamestate.ui_buttons:
+                    if button.is_moused():
+                        button.event()
+                        audio.play('blip.ogg')
         
         elif event.type == pygame.MOUSEWHEEL:
             scroll_direction = event.y  # 1 or -1

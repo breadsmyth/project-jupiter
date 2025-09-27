@@ -1,14 +1,19 @@
 import pygame
 
 import constants
+import gamestate
 
 
-border_width = 10 * constants.WINDOW_SCALE
+def init():
+    global border_width
+    border_width = 5 * constants.WINDOW_SCALE
+
 
 class Text_Button:
     def __init__(self, text_surf, pos, size, event):
         'Construct a textbutton where the button has'
         'position `pos` and size `size`'
+
 
         # account for hidpi
         size = (
@@ -46,6 +51,9 @@ class Text_Button:
 
         # calculate bounding rect
         self.rect = self.surf.get_rect().move(*pos)
+
+        # add to buttons list
+        gamestate.ui_buttons.append(self)
     
     def draw(self, surf):
         'Blit this button to surf'

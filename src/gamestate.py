@@ -7,7 +7,10 @@ def init():
     config = load_config()
 
     global current_context
-    current_context = context.title_screen
+    current_context = context.title_context
 
     global running
     running = True
+
+    global ui_buttons
+    ui_buttons = []

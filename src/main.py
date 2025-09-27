@@ -2,6 +2,7 @@ import pygame
 
 import audio
 import constants
+import draw.button
 import draw.text
 import event
 import context
@@ -34,6 +35,7 @@ clock = pygame.time.Clock()
 # initialize everything else
 audio.init()
 event.init()
+draw.button.init()
 draw.text.init()
 
 context.init()
