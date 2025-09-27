@@ -2,7 +2,7 @@ import pygame
 
 import audio
 import gamestate
-import sprite
+import draw.sprite
 
 
 
@@ -42,7 +42,7 @@ def handle(events):
 
 def init():
     global cursor_img
-    cursor_img = sprite.load('cursor.png')
+    cursor_img = draw.sprite.load('cursor.png')
 
 
 def is_pressed(key):
