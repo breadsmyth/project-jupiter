@@ -32,6 +32,17 @@ def init():
         pos=(TITLE_POS[0], 400),
         size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
         event=start_event)
+    
+    def quit_event():
+        gamestate.running = False
+
+    global QUIT_BTN
+    QUIT_TEXT = draw.text.Text('Quit', 50)
+    QUIT_BTN = draw.button.Text_Button(
+        text_surf=QUIT_TEXT,
+        pos=(TITLE_POS[0], 500),
+        size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
+        event=quit_event)
 
 
 def title_context(screen):
@@ -40,3 +51,4 @@ def title_context(screen):
     # screen.blit(TITLE_TEXT, TITLE_POS)
 
     START_BTN.draw(screen)
+    QUIT_BTN.draw(screen)
