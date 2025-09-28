@@ -23,7 +23,8 @@ def handle(events):
 
             # Handle specific keypress
             if event.key == pygame.K_ESCAPE:
-                gamestate.running = False
+                # gamestate.running = False
+                pass
 
         elif event.type == pygame.KEYUP:
             keys_pressed[event.key] = False

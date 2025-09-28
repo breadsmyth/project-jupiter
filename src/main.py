@@ -54,4 +54,4 @@ while gamestate.running:
     event.draw_cursor(screen)
 
     pygame.display.flip()
-    clock.tick(constants.FPS)
+    gamestate.time_elapsed += clock.tick(constants.FPS)

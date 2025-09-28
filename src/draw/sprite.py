@@ -1,10 +1,19 @@
 import os
 import pygame
 
+import constants
 import gamestate
 
 
 IMG_PATH = os.path.join('assets', 'img')
+
+
+def draw(screen, image, pos):
+    pos = (
+        pos[0] * constants.WINDOW_SCALE,
+        pos[1] * constants.WINDOW_SCALE)
+    
+    screen.blit(image, pos)
 
 
 def load(filename):
