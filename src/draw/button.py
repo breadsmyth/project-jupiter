@@ -10,9 +10,17 @@ def init():
 
 
 class Text_Button:
-    def __init__(self, text_surf, pos, size, event):
-        'Construct a textbutton where the button has'
-        'position `pos` and size `size`'
+    def __init__(self, text_surf, pos, size, event, context):
+        """Construct a textbutton element.
+
+        text_sutf:  surface containing the text to display.
+        pos:        the position where this button will be drawn.
+        size:       size of the element, will be expanded to cover
+                    text_surf if needed.
+        event:      function to be called when the button is clicked.
+        context:    context.Context enum during which this button
+                    is clickable.
+        """
 
 
         # account for hidpi
@@ -52,8 +60,8 @@ class Text_Button:
         # calculate bounding rect
         self.rect = self.surf.get_rect().move(*pos)
 
-        # add to buttons list
-        gamestate.ui_buttons.append(self)
+        # add to buttons list for the current context
+        gamestate.ui_buttons[context].append(self)
     
     def draw(self, surf):
         'Blit this button to surf'

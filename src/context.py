@@ -1,3 +1,5 @@
+from enum import Enum, auto
+
 import pygame
 
 import draw.button
@@ -7,16 +9,30 @@ import draw.sprite
 import draw.text
     
 
+class Context(Enum):
+    MAIN = auto()
+    SPLASH = auto()
+    TITLE = auto()
+
+
 def change_context(new_context):
-    gamestate.ui_buttons.clear()
     gamestate.current_context = new_context
 
 
-def main_context(screen):
-    pass
+def handle(screen):
+    match gamestate.current_context:
+        case Context.MAIN:
+            main_context(screen)
+        case Context.SPLASH:
+            splash_context(screen)
+        case Context.TITLE:
+            title_context(screen)
 
 
 def init():
+    for context in Context:
+        gamestate.ui_buttons[context] = []
+
     init_splash()
     init_title()
 
@@ -61,7 +77,9 @@ def init_title():
         text_surf=START_TEXT,
         pos=(TITLE_POS[0], 400),
         size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
-        event=start_event)
+        event=start_event,
+        context=Context.TITLE,
+    )
     
     def quit_event():
         gamestate.running = False
@@ -72,7 +90,13 @@ def init_title():
         text_surf=QUIT_TEXT,
         pos=(TITLE_POS[0], 500),
         size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
-        event=quit_event)
+        event=quit_event,
+        context=Context.TITLE,
+    )
+
+
+def main_context(screen):
+    pass
 
 
 def splash_context(screen):
@@ -91,7 +115,7 @@ def splash_context(screen):
     screen.blit(SPLASH_OVERLAY, (0, 0))
 
     if gamestate.time_elapsed > 2000:
-        gamestate.current_context = title_context
+        change_context(Context.TITLE)
 
 
 def title_context(screen):

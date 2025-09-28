@@ -1,5 +1,5 @@
 from config import load as load_config
-import context
+from context import Context
 
 
 def init():
@@ -7,7 +7,7 @@ def init():
     config = load_config()
 
     global current_context
-    current_context = context.splash_context
+    current_context = Context.SPLASH
 
     global running
     running = True
@@ -16,4 +16,4 @@ def init():
     time_elapsed = 0  # in milliseconds
 
     global ui_buttons
-    ui_buttons = []
+    ui_buttons = {}

@@ -32,7 +32,7 @@ def handle(events):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # left click
                 # check to see whether the mouse is in a UI button
-                for button in gamestate.ui_buttons:
+                for button in gamestate.ui_buttons[gamestate.current_context]:
                     if button.is_moused():
                         button.event()
                         audio.play('blip.ogg')

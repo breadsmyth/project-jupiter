@@ -49,7 +49,7 @@ while gamestate.running:
 
     event.handle(pygame.event.get())
 
-    gamestate.current_context(screen)
+    context.handle(screen)
 
     event.draw_cursor(screen)
 
