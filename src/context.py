@@ -33,8 +33,14 @@ def init():
     for context in Context:
         gamestate.ui_buttons[context] = []
 
+    init_main()
     init_splash()
     init_title()
+
+
+def init_main():
+    global PLAYER_IMG
+    PLAYER_IMG = draw.sprite.load('peep.png')
 
 
 def init_splash():
@@ -69,7 +75,7 @@ def init_title():
     TITLE_POS = (x // constants.WINDOW_SCALE, 100)
 
     def start_event():
-        change_context(main_context)
+        change_context(Context.MAIN)
 
     global START_BTN
     START_TEXT = draw.text.Text('Start', 50)
@@ -96,7 +102,7 @@ def init_title():
 
 
 def main_context(screen):
-    pass
+    draw.sprite.draw(screen, PLAYER_IMG, (100, 100))
 
 
 def splash_context(screen):
