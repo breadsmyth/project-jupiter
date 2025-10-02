@@ -1,3 +1,4 @@
+from enum import Enum, auto
 import subprocess
 
 
@@ -16,6 +17,13 @@ class Color:
     BLUE = (116, 199, 236)
     PURPLE = (203, 166, 247)
     WHITE = (255, 255, 255)
+
+
+class Context(Enum):
+    MAIN = auto()
+    SPLASH = auto()
+    TITLE = auto()
+
 
 FPS = 30
 RESOLUTION = (800, 800)

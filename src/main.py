@@ -2,10 +2,10 @@ import pygame
 
 import audio
 import constants
+import context.handler
 import draw.button
 import draw.text
 import event
-import context
 import gamestate
 
 
@@ -38,7 +38,7 @@ event.init()
 draw.button.init()
 draw.text.init()
 
-context.init()
+context.handler.init()
 
 
 # Test code
@@ -49,7 +49,7 @@ while gamestate.running:
 
     event.handle(pygame.event.get())
 
-    context.handle(screen)
+    context.handler.handle(screen)
 
     event.draw_cursor(screen)
 

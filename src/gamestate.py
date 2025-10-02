@@ -1,5 +1,5 @@
 from config import load as load_config
-from context import Context
+import constants
 
 
 def init():
@@ -7,7 +7,7 @@ def init():
     config = load_config()
 
     global current_context
-    current_context = Context.SPLASH
+    current_context = constants.Context.SPLASH
 
     global running
     running = True
