@@ -28,7 +28,7 @@ class Slot(draw.button.Button):
         # draw the edges of the border in contrast
         self.surf.fill(constants.Color.WHITE)
         self.surf.fill(
-            constants.Color.BG,
+            constants.Color.BLACK,
             pygame.Rect(
                 0,
                 0,
@@ -38,7 +38,7 @@ class Slot(draw.button.Button):
     def draw(self, surf):
         bg_color = constants.Color.FG
         if self.is_moused():
-            bg_color = constants.Color.ACTIVE
+            bg_color = constants.Color.FG_ACTIVE
         
         self.inner_surf.fill(bg_color)
 

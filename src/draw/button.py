@@ -44,7 +44,7 @@ class Button:
         
         bg_color = constants.Color.BG
         if self.is_moused():
-            bg_color = constants.Color.ACTIVE
+            bg_color = constants.Color.BG_ACTIVE
 
         self.inner_surf.fill(bg_color)
 
