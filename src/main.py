@@ -3,8 +3,6 @@ import pygame
 import audio
 import constants
 import context.handler
-import draw.button
-import draw.slot
 import draw.text
 import event
 import gamestate
@@ -16,6 +14,8 @@ gamestate.init()
 if gamestate.config['hidpi']:
     constants.RESOLUTION = tuple(value * 2 for value in constants.RESOLUTION)
     constants.WINDOW_SCALE *= 2
+
+constants.ui_init()
 
 resolution = constants.RESOLUTION
 
@@ -36,8 +36,6 @@ clock = pygame.time.Clock()
 # initialize everything else
 audio.init()
 event.init()
-draw.button.init()
-draw.slot.init()
 draw.text.init()
 
 context.handler.init()

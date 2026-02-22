@@ -4,14 +4,6 @@ import constants
 import draw.button
 
 
-def init():
-    global GAP_WIDTH
-    GAP_WIDTH = 5 * constants.WINDOW_SCALE
-
-    global SQUARE_HEIGHT
-    SQUARE_HEIGHT = 82 * constants.WINDOW_SCALE
-
-
 class Slot(draw.button.Button):
     def __init__(self, name, pos):
         def slot_event():
@@ -21,7 +13,7 @@ class Slot(draw.button.Button):
 
         super().__init__(
             pos=pos,
-            size=(SQUARE_HEIGHT, SQUARE_HEIGHT),
+            size=(constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT),
             event=slot_event,
             context=constants.Context.MAIN)
         
@@ -32,8 +24,8 @@ class Slot(draw.button.Button):
             pygame.Rect(
                 0,
                 0,
-                SQUARE_HEIGHT - GAP_WIDTH,
-                SQUARE_HEIGHT - GAP_WIDTH))
+                constants.UI_SLOT_HEIGHT - constants.UI_GAP,
+                constants.UI_SLOT_HEIGHT - constants.UI_GAP))
 
     def draw(self, surf):
         bg_color = constants.Color.FG
@@ -44,4 +36,4 @@ class Slot(draw.button.Button):
 
         surf.blit(self.surf, self.pos)
         surf.blit(self.inner_surf,
-                  tuple(dim + GAP_WIDTH for dim in self.pos))
+                  tuple(dim + constants.UI_GAP for dim in self.pos))

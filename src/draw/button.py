@@ -4,11 +4,6 @@ import constants
 import gamestate
 
 
-def init():
-    global border_width
-    border_width = 5 * constants.WINDOW_SCALE
-
-
 class Button:
     "Base class for buttons"
     def __init__(self, pos, size, event, context):
@@ -27,7 +22,7 @@ class Button:
         self.surf.fill(constants.Color.FG)
 
         # add an inner box
-        inner_size = tuple(dim - (border_width * 2) for dim in self.surf.get_size())
+        inner_size = tuple(dim - (constants.UI_GAP * 2) for dim in self.surf.get_size())
         self.inner_surf = pygame.Surface(inner_size)
 
         self.pos = pos
@@ -50,7 +45,7 @@ class Button:
 
         surf.blit(self.surf, self.pos)
         surf.blit(self.inner_surf,
-                  tuple(dim + border_width for dim in self.pos))
+                  tuple(dim + constants.UI_GAP for dim in self.pos))
     
     def is_moused(self):
         mouse_pos = pygame.mouse.get_pos()

@@ -31,3 +31,11 @@ RESOLUTION = (800, 800)
 TITLE = 'Project Jupiter'
 WINDOW_SCALE = 1
 WINDOW_TITLE = f'{TITLE} ({current_hash})'
+
+def ui_init():
+    global UI_GAP
+    UI_GAP = 5 * WINDOW_SCALE
+
+    global UI_SLOT_HEIGHT
+    # UI_SLOT_HEIGHT = 82 * WINDOW_SCALE
+    UI_SLOT_HEIGHT = (RESOLUTION[1] // 3 - 4*UI_GAP) // 3
