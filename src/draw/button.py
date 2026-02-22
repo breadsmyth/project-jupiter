@@ -6,7 +6,8 @@ import gamestate
 
 class Button:
     "Base class for buttons"
-    def __init__(self, pos, size, event, context):
+    def __init__(self, pos, size, event, context, audio=None,
+                 right_click_event=None):
         """Construct a button element.
 
         pos:        the position where this button will be drawn.
@@ -27,6 +28,8 @@ class Button:
 
         self.pos = pos
         self.event = event
+        self.audio = audio
+        self.right_click_event = right_click_event
 
         # calculate bounding rect
         self.rect = self.surf.get_rect().move(*pos)
@@ -81,7 +84,8 @@ class Text_Button(Button):
             pos[0] + (size[0] - text_surf.width) // 2,
             pos[1] + (size[1] - text_surf.height) // 2)
         
-        super().__init__(pos, size, event, context)
+        super().__init__(pos, size, event, context,
+                         audio='blip.ogg')
 
     
     def draw(self, surf):

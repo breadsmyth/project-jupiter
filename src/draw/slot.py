@@ -13,16 +13,21 @@ def on_right_click(slot_name):
 
 class Slot(draw.button.Button):
     def __init__(self, name, pos):
-        def slot_event():
+        def left_click_event():
             on_left_click(self.name)
+
+        def right_click_event():
+            on_right_click(self.name)
 
         self.name = name
 
         super().__init__(
             pos=pos,
             size=(constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT),
-            event=slot_event,
-            context=constants.Context.MAIN)
+            event=left_click_event,
+            context=constants.Context.MAIN,
+            audio=None,
+            right_click_event=right_click_event)
         
         # draw the edges of the border in contrast
         self.surf.fill(constants.Color.WHITE)

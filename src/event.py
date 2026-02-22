@@ -35,7 +35,19 @@ def handle(events):
                 for button in gamestate.ui_buttons[gamestate.current_context]:
                     if button.is_moused():
                         button.event()
-                        audio.play('blip.ogg')
+                        
+                        if button.audio is not None:
+                            audio.play(button.audio)
+
+            elif event.button == 3:  # right click
+                # check to see whether the mouse is in a UI button
+                for button in gamestate.ui_buttons[gamestate.current_context]:
+                    if (button.is_moused()
+                            and button.right_click_event is not None):
+                        button.right_click_event()
+                        
+                        if button.audio is not None:
+                            audio.play(button.audio)
         
         elif event.type == pygame.MOUSEWHEEL:
             scroll_direction = event.y  # 1 or -1

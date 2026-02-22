@@ -28,4 +28,7 @@ def init():
 
 
 def play(filename):
+    if filename not in cached_sounds.keys():
+        raise KeyError(f'{filename} is not a valid sound!')
+
     cached_sounds[filename]()
