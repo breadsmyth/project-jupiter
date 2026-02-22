@@ -1,6 +1,7 @@
 import constants
 from context import handler
-import draw
+import draw.button
+import draw.text
 import gamestate
 
 
@@ -19,8 +20,10 @@ def init():
     START_TEXT = draw.text.Text('Start', 50)
     START_BTN = draw.button.Text_Button(
         text_surf=START_TEXT,
-        pos=(TITLE_POS[0], 400),
-        size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
+        pos=(TITLE_POS[0] * constants.WINDOW_SCALE,
+             400 * constants.WINDOW_SCALE),
+        size=(TITLE_TEXT.width,
+              50 * constants.WINDOW_SCALE),
         event=start_event,
         context=constants.Context.TITLE,
     )
@@ -32,8 +35,10 @@ def init():
     QUIT_TEXT = draw.text.Text('Quit', 50)
     QUIT_BTN = draw.button.Text_Button(
         text_surf=QUIT_TEXT,
-        pos=(TITLE_POS[0], 500),
-        size=(TITLE_TEXT.width // constants.WINDOW_SCALE, 50),
+        pos=(TITLE_POS[0] * constants.WINDOW_SCALE,
+             500 * constants.WINDOW_SCALE),
+        size=(TITLE_TEXT.width,
+              50 * constants.WINDOW_SCALE),
         event=quit_event,
         context=constants.Context.TITLE,
     )

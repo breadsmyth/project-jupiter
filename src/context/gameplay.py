@@ -5,7 +5,7 @@ import draw.sprite
 
 
 def init():
-    GAP_WIDTH = 10
+    GAP_WIDTH = 5 * constants.WINDOW_SCALE
     SQUARE_HEIGHT = (constants.RESOLUTION[1] // 3 - 4*GAP_WIDTH) // 3
     SQUARE_LEFT = (constants.RESOLUTION[0] - (5*SQUARE_HEIGHT + 4*GAP_WIDTH)) // 2
 

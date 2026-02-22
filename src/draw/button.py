@@ -9,37 +9,19 @@ def init():
     border_width = 5 * constants.WINDOW_SCALE
 
 
-class Text_Button:
-    def __init__(self, text_surf, pos, size, event, context):
-        """Construct a textbutton element.
+class Button:
+    "Base class for buttons"
+    def __init__(self, pos, size, event, context):
+        """Construct a button element.
 
-        text_sutf:  surface containing the text to display.
         pos:        the position where this button will be drawn.
         size:       size of the element, will be expanded to cover
-                    text_surf if needed.
+                    surf if needed.
         event:      function to be called when the button is clicked.
         context:    context.Context enum during which this button
                     is clickable.
         """
 
-
-        # account for hidpi
-        size = (
-            size[0] * constants.WINDOW_SCALE,
-            size[1] * constants.WINDOW_SCALE)
-        pos = (
-            pos[0] * constants.WINDOW_SCALE,
-            pos[1] * constants.WINDOW_SCALE)
-        
-        # verify the text will fit in the size
-        if text_surf.width > size[0]:
-            print(f'WARNING: Text {text_surf.text} too wide to fit in width {size[0]}!')
-            size = (text_surf.width, size[1])
-
-        if text_surf.height > size[1]:
-            print(f'WARNING: Text {text_surf.text} too tall to fit in height {size[1]}!')
-            size = (size[0], text_surf.height)
-        
         # Construct the surface
         self.surf = pygame.Surface(size)
         self.surf.fill(constants.Color.FG)
@@ -48,14 +30,8 @@ class Text_Button:
         inner_size = tuple(dim - (border_width * 2) for dim in self.surf.get_size())
         self.inner_surf = pygame.Surface(inner_size)
 
-        self.text_surf = text_surf
         self.pos = pos
         self.event = event
-
-        # calculate text position
-        self.text_pos = (
-            pos[0] + (size[0] - text_surf.width) // 2,
-            pos[1] + (size[1] - text_surf.height) // 2)
 
         # calculate bounding rect
         self.rect = self.surf.get_rect().move(*pos)
@@ -75,9 +51,45 @@ class Text_Button:
         surf.blit(self.surf, self.pos)
         surf.blit(self.inner_surf,
                   tuple(dim + border_width for dim in self.pos))
-        
-        surf.blit(self.text_surf.surf, self.text_pos)
     
     def is_moused(self):
         mouse_pos = pygame.mouse.get_pos()
         return self.rect.collidepoint(mouse_pos)
+
+
+class Text_Button(Button):
+    def __init__(self, text_surf, pos, size, event, context):
+        """Construct a textbutton element.
+
+        text_sutf:  surface containing the text to display.
+        pos:        the position where this button will be drawn.
+        size:       size of the element, will be expanded to cover
+                    text_surf if needed.
+        event:      function to be called when the button is clicked.
+        context:    context.Context enum during which this button
+                    is clickable.
+        """
+
+        # verify the text will fit in the size
+        if text_surf.width > size[0]:
+            print(f'WARNING: Text {text_surf.text} too wide to fit in width {size[0]}!')
+            size = (text_surf.width, size[1])
+
+        if text_surf.height > size[1]:
+            print(f'WARNING: Text {text_surf.text} too tall to fit in height {size[1]}!')
+            size = (size[0], text_surf.height)
+        
+        self.text_surf = text_surf
+
+        # calculate text position
+        self.text_pos = (
+            pos[0] + (size[0] - text_surf.width) // 2,
+            pos[1] + (size[1] - text_surf.height) // 2)
+        
+        super().__init__(pos, size, event, context)
+
+    
+    def draw(self, surf):
+        'Blit this button to surf'
+        super().draw(surf)
+        surf.blit(self.text_surf.surf, self.text_pos)
