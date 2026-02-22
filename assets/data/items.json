@@ -1,0 +1,10 @@
+{
+    "goo": {
+        "img": "goo.png",
+        "name": "Goo"
+    },
+    "peep": {
+        "img": "peep.png",
+        "name": "Peep"
+    }
+}

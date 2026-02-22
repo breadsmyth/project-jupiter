@@ -1,6 +1,7 @@
 import pygame
 
 import constants
+import game.item
 import gamestate
 import draw.slot
 
@@ -36,6 +37,10 @@ def init():
             id = col + 5*row
 
             draw.slot.Slot(f'inv_{id}', (x, y))
+    
+    # Test code
+    global TEST_ITEM
+    TEST_ITEM = game.item.ItemStack('goo')
 
 
 def do(screen):
@@ -45,3 +50,6 @@ def do(screen):
     # Draw all inventory slots
     for slot in gamestate.ui_buttons[constants.Context.MAIN]:
         slot.draw(screen)
+    
+    # Test: draw the item
+    TEST_ITEM.draw(screen)
