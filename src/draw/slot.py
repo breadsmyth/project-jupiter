@@ -4,10 +4,17 @@ import constants
 import draw.button
 
 
+def on_left_click(slot_name):
+    print(f'Left clicked slot {slot_name}')
+
+def on_right_click(slot_name):
+    print(f'Right clicked slot {slot_name}')
+
+
 class Slot(draw.button.Button):
     def __init__(self, name, pos):
         def slot_event():
-            return
+            on_left_click(self.name)
 
         self.name = name
 

@@ -33,9 +33,9 @@ def init():
         for col in range(5):
             x = SQUARE_LEFT + col * (constants.UI_SLOT_HEIGHT + constants.UI_GAP)
             y = INV_TOP + constants.UI_GAP + row * (constants.UI_SLOT_HEIGHT + constants.UI_GAP)
-            draw.slot.Slot(
-                f'{x} {y}',
-                (x, y))
+            id = col + 5*row
+
+            draw.slot.Slot(f'inv_{id}', (x, y))
 
 
 def do(screen):
