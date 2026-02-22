@@ -4,6 +4,7 @@ import audio
 import constants
 import context.handler
 import draw.button
+import draw.slot
 import draw.text
 import event
 import gamestate
@@ -36,6 +37,7 @@ clock = pygame.time.Clock()
 audio.init()
 event.init()
 draw.button.init()
+draw.slot.init()
 draw.text.init()
 
 context.handler.init()
