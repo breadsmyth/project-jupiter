@@ -39,8 +39,10 @@ def init():
             draw.slot.Slot(f'inv_{id}', (x, y))
     
     # Test code
-    global TEST_ITEM
-    TEST_ITEM = game.item.ItemStack('goo')
+    global TEST_ITEMS
+    TEST_ITEMS = []
+    TEST_ITEMS.append(game.item.ItemStack('goo', 'mouse', quantity=10))
+    TEST_ITEMS.append(game.item.ItemStack('goo', 'inv_3', quantity=2))
 
 
 def do(screen):
@@ -51,5 +53,6 @@ def do(screen):
     for slot in gamestate.ui_buttons[constants.Context.MAIN]:
         slot.draw(screen)
     
-    # Test: draw the item
-    TEST_ITEM.draw(screen)
+    # Test: draw the items
+    for item in TEST_ITEMS:
+        item.draw(screen)

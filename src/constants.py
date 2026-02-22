@@ -37,5 +37,7 @@ def ui_init():
     UI_GAP = 5 * WINDOW_SCALE
 
     global UI_SLOT_HEIGHT
-    # UI_SLOT_HEIGHT = 82 * WINDOW_SCALE
     UI_SLOT_HEIGHT = (RESOLUTION[1] // 3 - 4*UI_GAP) // 3
+
+    global UI_ITEM_HEIGHT
+    UI_ITEM_HEIGHT = UI_SLOT_HEIGHT - 4 * UI_GAP
