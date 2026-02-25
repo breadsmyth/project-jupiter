@@ -39,11 +39,9 @@ def init():
             draw.slot.Slot(f'inv_{id}', (x, y))
     
     # Test code
-    global TEST_ITEMS
-    TEST_ITEMS = []
-    TEST_ITEMS.append(game.item.ItemStack('goo', 'inv_10'))
-    TEST_ITEMS.append(game.item.ItemStack('goo', 'inv_3'))
-    TEST_ITEMS.append(game.item.ItemStack('peep', 'inv_4'))
+    game.item.ItemStack('goo', 'inv_10')
+    game.item.ItemStack('goo', 'inv_3')
+    game.item.ItemStack('peep', 'inv_4')
 
 
 def do(screen):
@@ -53,7 +51,11 @@ def do(screen):
     # Draw all inventory slots
     for slot in gamestate.ui_buttons[constants.Context.MAIN]:
         slot.draw(screen)
+
+        item = slot.get_item()
+        if item is not None:
+            item.draw(screen)
     
-    # Test: draw the items
-    for item in TEST_ITEMS:
-        item.draw(screen)
+    # Draw mouse item
+    if gamestate.mouse_item is not None:
+        gamestate.mouse_item.draw(screen)
