@@ -26,25 +26,14 @@ def get_img(item_id):
     
     return sprite
 
-def make_quantity_text(quantity):
-    if quantity == 1: return None
-
-    return draw.text.Text(
-        text=str(quantity),
-        size=ITEM_FONT_SIZE,
-        color=constants.Color.BLACK)
-
 
 class ItemStack:
-    def __init__(self, item_id, slot_id, quantity=1):
+    def __init__(self, item_id, slot_id):
         self.item_id = item_id
         self.slot_id = slot_id
-        self.quantity = quantity
 
         self.name = get_name(item_id)
         self.sprite = get_img(item_id)
-
-        self.quantity_text = make_quantity_text(self.quantity)
 
         gamestate.itemstacks.append(self)
     
@@ -72,9 +61,4 @@ class ItemStack:
             screen,
             self.sprite,
             tuple(dim + constants.UI_GAP for dim in pos))
-
-        if self.quantity_text is not None:
-            self.quantity_text.draw(screen, (
-                pos[0] + (constants.UI_ITEM_HEIGHT - len(str(self.quantity))*ITEM_FONT_SIZE//2) // constants.WINDOW_SCALE,
-                pos[1] + (constants.UI_ITEM_HEIGHT - ITEM_FONT_SIZE//2) // constants.WINDOW_SCALE))
 
