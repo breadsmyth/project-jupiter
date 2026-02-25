@@ -5,15 +5,12 @@ import pygame
 import constants
 import draw.slot
 import draw.sprite
-import draw.text
 import gamestate
 
 
 with open('assets/data/items.json') as file:
     item_dict = json.loads(file.read())
 
-
-ITEM_FONT_SIZE = 50
 
 def get_name(item_id):
     return item_dict[item_id]['name']
@@ -26,6 +23,7 @@ def get_img(item_id):
     
     return sprite
 
+MOUSE_OFFSET = 20
 
 class ItemStack:
     def __init__(self, item_id, slot_id):
@@ -41,7 +39,8 @@ class ItemStack:
         pos = (0, 0)
 
         if self.slot_id == 'mouse':
-            pos = pygame.mouse.get_pos()
+            pos = tuple(dim - MOUSE_OFFSET * constants.WINDOW_SCALE
+                        for dim in pygame.mouse.get_pos())
         else:
             my_slot = None
             for slot in gamestate.ui_buttons[gamestate.current_context]:
