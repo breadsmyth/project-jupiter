@@ -9,8 +9,17 @@ def init():
     global current_context
     current_context = constants.Context.SPLASH
 
+    global itemstacks
+    itemstacks = []
+
+    global mouse_item
+    mouse_item = None
+
     global running
     running = True
+
+    global slots
+    slots = {}
 
     global time_elapsed
     time_elapsed = 0  # in milliseconds

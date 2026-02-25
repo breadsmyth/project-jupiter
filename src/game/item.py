@@ -45,6 +45,8 @@ class ItemStack:
         self.sprite = get_img(item_id)
 
         self.quantity_text = make_quantity_text(self.quantity)
+
+        gamestate.itemstacks.append(self)
     
     def draw(self, screen):
         pos = (0, 0)

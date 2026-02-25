@@ -2,10 +2,22 @@ import pygame
 
 import constants
 import draw.button
+import gamestate
 
 
 def on_left_click(slot_name):
-    print(f'Left clicked slot {slot_name}')
+    slot = gamestate.slots[slot_name]
+    item = slot.get_item()
+
+    if item is None:
+        if gamestate.mouse_item is not None:
+            gamestate.mouse_item.slot_id = slot_name
+            gamestate.mouse_item = None
+    
+    else:
+        if gamestate.mouse_item is None:
+            gamestate.mouse_item = item
+            item.slot_id = 'mouse'
 
 def on_right_click(slot_name):
     print(f'Right clicked slot {slot_name}')
@@ -29,6 +41,8 @@ class Slot(draw.button.Button):
             audio=None,
             right_click_event=right_click_event)
         
+        gamestate.slots[name] = self
+        
         # draw the edges of the border in contrast
         self.surf.fill(constants.Color.WHITE)
         self.surf.fill(
@@ -49,3 +63,10 @@ class Slot(draw.button.Button):
         surf.blit(self.surf, self.pos)
         surf.blit(self.inner_surf,
                   tuple(dim + constants.UI_GAP for dim in self.pos))
+    
+    def get_item(self):
+        for item in gamestate.itemstacks:
+            if item.slot_id == self.name:
+                return item
+        else:
+            return None

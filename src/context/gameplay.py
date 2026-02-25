@@ -41,8 +41,9 @@ def init():
     # Test code
     global TEST_ITEMS
     TEST_ITEMS = []
-    TEST_ITEMS.append(game.item.ItemStack('goo', 'mouse', quantity=10))
+    TEST_ITEMS.append(game.item.ItemStack('goo', 'inv_10', quantity=10))
     TEST_ITEMS.append(game.item.ItemStack('goo', 'inv_3', quantity=2))
+    TEST_ITEMS.append(game.item.ItemStack('peep', 'inv_4', quantity=1))
 
 
 def do(screen):
