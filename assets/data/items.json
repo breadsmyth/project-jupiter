@@ -1,4 +1,8 @@
 {
+    "brick": {
+        "img": "brick.png",
+        "name": "Brick"
+    },
     "goo": {
         "img": "goo.png",
         "name": "Goo"

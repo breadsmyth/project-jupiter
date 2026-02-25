@@ -41,7 +41,7 @@ def init():
     # Test code
     game.item.ItemStack('goo', 'inv_10')
     game.item.ItemStack('goo', 'inv_3')
-    game.item.ItemStack('peep', 'inv_4')
+    game.item.ItemStack('brick', 'inv_4')
 
 
 def do(screen):
