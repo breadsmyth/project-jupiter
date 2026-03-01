@@ -1,5 +1,6 @@
 import pygame
 
+import audio
 import constants
 import draw.button
 import gamestate
@@ -10,14 +11,18 @@ def on_left_click(slot_name):
     item = slot.get_item()
 
     if item is None:
+        # clkicked on an empty slot
         if gamestate.mouse_item is not None:
+            # putting down an item
             gamestate.mouse_item.slot_id = slot_name
             gamestate.mouse_item = None
     
     else:
         if gamestate.mouse_item is None:
+            # picking up an item
             gamestate.mouse_item = item
             item.slot_id = 'mouse'
+            audio.play('pickup.ogg')
 
 def on_right_click(slot_name):
     print(f'Right clicked slot {slot_name}')

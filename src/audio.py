@@ -9,26 +9,26 @@ class Sound():
         self.filename = filename
         self.maxtime = maxtime
 
+        self.sound = mixer.Sound(os.path.join(AUDIO_PATH, filename))
 
-sounds = {
-    Sound('blip.ogg', maxtime=100)
-}
+    def play(self):
+        self.sound.play(maxtime=self.maxtime)
+
 
 cached_sounds = {}
 
-
 def init():
+    sounds = [
+        Sound('blip.ogg', maxtime=100),
+        Sound('pickup.ogg', maxtime=100),
+    ]
+
     for sound_obj in sounds:
-        sound = mixer.Sound(os.path.join(AUDIO_PATH, sound_obj.filename))
-
-        def play_func():
-            sound.play(maxtime=sound_obj.maxtime)
-
-        cached_sounds[sound_obj.filename] = play_func
+        cached_sounds[sound_obj.filename] = sound_obj
 
 
 def play(filename):
     if filename not in cached_sounds.keys():
         raise KeyError(f'{filename} is not a valid sound!')
 
-    cached_sounds[filename]()
+    cached_sounds[filename].play()
