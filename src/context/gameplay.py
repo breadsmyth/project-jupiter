@@ -4,6 +4,7 @@ import constants
 import game.item
 import gamestate
 import draw.slot
+import draw.sprite
 import draw.tooltip
 
 
@@ -38,13 +39,24 @@ def init():
             id = col + 5*row
 
             draw.slot.Slot(f'inv_{id}', (x, y))
-
-    draw.tooltip.init()
     
-    # Test code
-    game.item.ItemStack('goo', 'inv_10')
-    game.item.ItemStack('goo', 'inv_3')
-    game.item.ItemStack('brick', 'inv_4')
+    # Create infinite source of Goo
+    global source_pos
+    source_pos = (
+        constants.RESOLUTION[0] // 2 - constants.UI_SLOT_HEIGHT // 2,
+        INV_HEIGHT - constants.UI_SLOT_HEIGHT // 2)
+    draw.slot.Slot(f'source', source_pos)
+
+    global source_decoration
+    source_decoration = draw.sprite.load('slot_decoration.png')
+    source_decoration = pygame.transform.scale(
+        source_decoration,
+        (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
+
+    game.item.ItemStack('goo', 'source')
+
+    # Initialize
+    draw.tooltip.init()
 
 
 def do(screen):
@@ -58,6 +70,13 @@ def do(screen):
         item = slot.get_item()
         if item is not None:
             item.draw(screen)
+
+    # Draw slot decorations
+    # For now, just source
+    draw.sprite.draw(
+        screen=screen,
+        image=source_decoration,
+        pos=tuple(dim // constants.WINDOW_SCALE for dim in source_pos))
     
     # Draw mouse item
     if gamestate.mouse_item is not None:

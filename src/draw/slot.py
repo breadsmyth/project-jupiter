@@ -26,7 +26,14 @@ def on_left_click(slot_name):
             gamestate.mouse_item = item
             item.slot_id = 'mouse'
             audio.play('pickup.ogg')
+
+            # special logic, refill the source
+            if slot_name == 'source':
+                game.item.ItemStack('goo', 'source')
         else:
+            # special logic, can't put items into the source
+            if slot.name == 'source': return
+
             # check for craft
             result = game.craft.check(
                 item.item_id,
