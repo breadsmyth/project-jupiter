@@ -2,6 +2,7 @@ import pygame
 
 import audio
 import constants
+import game.craft
 import draw.button
 import gamestate
 
@@ -24,6 +25,23 @@ def on_left_click(slot_name):
             gamestate.mouse_item = item
             item.slot_id = 'mouse'
             audio.play('pickup.ogg')
+        else:
+            # check for craft
+            result = game.craft.check(
+                item.item_id,
+                gamestate.mouse_item.item_id)
+            
+            if result is not None:
+                # do the craft
+                pass
+            else:
+                # swap the two items
+                temp = gamestate.mouse_item
+                gamestate.mouse_item = item
+                item.slot_id = 'mouse'
+                temp.slot_id = slot_name
+                audio.play('pickup.ogg')
+
 
 def on_right_click(slot_name):
     print(f'Right clicked slot {slot_name}')
