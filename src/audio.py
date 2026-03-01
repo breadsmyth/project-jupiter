@@ -21,6 +21,7 @@ def init():
     sounds = [
         Sound('blip.ogg', maxtime=100),
         Sound('pickup.ogg', maxtime=100),
+        Sound('put.ogg', maxtime=100),
     ]
 
     for sound_obj in sounds:

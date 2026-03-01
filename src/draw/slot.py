@@ -16,6 +16,7 @@ def on_left_click(slot_name):
             # putting down an item
             gamestate.mouse_item.slot_id = slot_name
             gamestate.mouse_item = None
+            audio.play('put.ogg')
     
     else:
         if gamestate.mouse_item is None:
