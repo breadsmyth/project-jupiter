@@ -9,58 +9,76 @@ import draw.sprite
 import gamestate
 
 
+def item_pickup(slot):
+    item = slot.get_item()
+
+    gamestate.mouse_item = item
+    item.slot_id = 'mouse'
+    audio.play('pickup.ogg')
+
+    # special logic, refill the source
+    if slot.name == 'source':
+        game.item.ItemStack('goo', 'source')
+
+
+def item_put(slot):
+    if gamestate.mouse_item is None: return
+
+    # special logic, delete all items from trash
+    if slot.name == 'trash':
+        gamestate.mouse_item = None
+        audio.play('trash.ogg')
+        return
+
+    gamestate.mouse_item.slot_id = slot.name
+    gamestate.mouse_item = None
+    audio.play('put.ogg')
+
+
+def item_swap(slot):
+    if gamestate.mouse_item is None:
+        raise Exception('Tried to swap without holding an item')
+
+    item = slot.get_item()
+
+    temp = gamestate.mouse_item
+    gamestate.mouse_item = item
+    item.slot_id = 'mouse'
+    temp.slot_id = slot.name
+    audio.play('pickup.ogg')
+
+
 def on_left_click(slot_name):
     slot = gamestate.slots[slot_name]
     item = slot.get_item()
 
     if item is None:
         # clkicked on an empty slot
-        if gamestate.mouse_item is not None:
-            # putting down an item
-
-            # special logic, delete all items from trash
-            if slot.name == 'trash':
-                gamestate.mouse_item = None
-                audio.play('trash.ogg')
-                return
-
-            gamestate.mouse_item.slot_id = slot_name
-            gamestate.mouse_item = None
-            audio.play('put.ogg')
+        item_put(slot)
+        return
     
+    if gamestate.mouse_item is None:
+        # picking up an item
+        item_pickup(slot)
+        return
+
+    # special logic, can't put items into the source
+    if slot.name == 'source': return
+
+    # check for craft
+    result = game.craft.check(
+        item.item_id,
+        gamestate.mouse_item.item_id)
+    
+    if result is not None:
+        # do the craft
+        gamestate.mouse_item = None
+        item.slot_id = None
+
+        game.item.ItemStack(result, slot.name)
+        audio.play('put.ogg')
     else:
-        if gamestate.mouse_item is None:
-            # picking up an item
-            gamestate.mouse_item = item
-            item.slot_id = 'mouse'
-            audio.play('pickup.ogg')
-
-            # special logic, refill the source
-            if slot_name == 'source':
-                game.item.ItemStack('goo', 'source')
-        else:
-            # special logic, can't put items into the source
-            if slot.name == 'source': return
-
-            # check for craft
-            result = game.craft.check(
-                item.item_id,
-                gamestate.mouse_item.item_id)
-            
-            if result is not None:
-                # do the craft
-                gamestate.mouse_item = None
-                item.slot_id = None
-
-                game.item.ItemStack(result, slot.name)
-                audio.play('put.ogg')
-            else:
-                # swap the two items
-                temp = gamestate.mouse_item
-                gamestate.mouse_item = item
-                item.slot_id = 'mouse'
-                temp.slot_id = slot_name
-                audio.play('pickup.ogg')
+        item_swap(slot)
 
 
 def on_right_click(slot_name):
