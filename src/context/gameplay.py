@@ -4,6 +4,7 @@ import constants
 import game.item
 import gamestate
 import draw.slot
+import draw.tooltip
 
 
 def init():
@@ -37,6 +38,8 @@ def init():
             id = col + 5*row
 
             draw.slot.Slot(f'inv_{id}', (x, y))
+
+    draw.tooltip.init()
     
     # Test code
     game.item.ItemStack('goo', 'inv_10')
@@ -59,3 +62,12 @@ def do(screen):
     # Draw mouse item
     if gamestate.mouse_item is not None:
         gamestate.mouse_item.draw(screen)
+    
+    # Draw tooltip
+    for slot in gamestate.slots.values():
+        if slot.is_moused():
+            item = slot.get_item()
+            if item is not None:
+                draw.tooltip.draw_tooltip(screen, item.item_id)
+
+            break
