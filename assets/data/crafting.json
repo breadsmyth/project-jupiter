@@ -1,0 +1,4 @@
+{
+    "brick": [ "goo", "goo" ],
+    "crusher": [ "brick", "brick" ]
+}

@@ -3,6 +3,10 @@
         "img": "brick.png",
         "name": "Brick"
     },
+    "crusher": {
+        "img": "crusher.png",
+        "name": "Crusher"
+    },
     "goo": {
         "img": "goo.png",
         "name": "Goo"

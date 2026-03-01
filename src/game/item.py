@@ -1,4 +1,5 @@
 import json
+import os
 
 import pygame
 
@@ -8,7 +9,7 @@ import draw.sprite
 import gamestate
 
 
-with open('assets/data/items.json') as file:
+with open(os.path.join('assets', 'data', 'items.json')) as file:
     item_dict = json.loads(file.read())
 
 

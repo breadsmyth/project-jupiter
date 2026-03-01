@@ -3,6 +3,7 @@ import pygame
 import audio
 import constants
 import game.craft
+import game.item
 import draw.button
 import gamestate
 
@@ -33,7 +34,11 @@ def on_left_click(slot_name):
             
             if result is not None:
                 # do the craft
-                pass
+                gamestate.mouse_item = None
+                item.slot_id = None
+
+                game.item.ItemStack(result, slot.name)
+                audio.play('put.ogg')
             else:
                 # swap the two items
                 temp = gamestate.mouse_item
