@@ -18,7 +18,7 @@ def item_pickup(slot):
 
     # special logic, refill the source
     if slot.name == 'source':
-        game.item.ItemStack('goo', 'source')
+        game.item.Item('goo', 'source')
 
 
 def item_put(slot):
@@ -26,7 +26,7 @@ def item_put(slot):
 
     # special logic, delete all items from trash
     if slot.name == 'trash':
-        gamestate.mouse_item = None
+        gamestate.mouse_item.delete()
         audio.play('trash.ogg')
         return
 
@@ -72,10 +72,10 @@ def on_left_click(slot_name):
     
     if result is not None:
         # do the craft
-        gamestate.mouse_item = None
-        item.slot_id = None
+        gamestate.mouse_item.delete()
+        item.delete()
 
-        game.item.ItemStack(result, slot.name)
+        game.item.Item(result, slot.name)
         audio.play('put.ogg')
     else:
         item_swap(slot)
@@ -127,7 +127,7 @@ class Slot(draw.button.Button):
                   tuple(dim + constants.UI_GAP for dim in self.pos))
     
     def get_item(self):
-        for item in gamestate.itemstacks:
+        for item in gamestate.items:
             if item.slot_id == self.name:
                 return item
         else:

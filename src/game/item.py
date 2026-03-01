@@ -26,7 +26,7 @@ def get_img(item_id):
 
 MOUSE_OFFSET = 20
 
-class ItemStack:
+class Item:
     def __init__(self, item_id, slot_id):
         self.item_id = item_id
         self.slot_id = slot_id
@@ -34,7 +34,14 @@ class ItemStack:
         self.name = get_name(item_id)
         self.sprite = get_img(item_id)
 
-        gamestate.itemstacks.append(self)
+        gamestate.items.append(self)
+    
+    def delete(self):
+        if gamestate.mouse_item == self:
+            gamestate.mouse_item = None
+
+        self.slot_id = None
+        gamestate.items.remove(self)
     
     def draw(self, screen):
         pos = (0, 0)

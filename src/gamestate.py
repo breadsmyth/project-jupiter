@@ -9,8 +9,8 @@ def init():
     global current_context
     current_context = constants.Context.SPLASH
 
-    global itemstacks
-    itemstacks = []
+    global items
+    items = []
 
     global mouse_item
     mouse_item = None

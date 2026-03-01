@@ -56,7 +56,7 @@ def init():
         source_decoration,
         (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
 
-    game.item.ItemStack('goo', 'source')
+    game.item.Item('goo', 'source')
 
     # Create trash slot
     trash_pos = (
