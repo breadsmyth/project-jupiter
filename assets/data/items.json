@@ -1,18 +1,12 @@
 {
-    "brick": {
-        "img": "brick.png",
-        "name": "Brick"
-    },
-    "crusher": {
-        "img": "crusher.png",
-        "name": "Crusher"
-    },
-    "goo": {
-        "img": "goo.png",
-        "name": "Goo"
-    },
-    "peep": {
-        "img": "peep.png",
-        "name": "Peep"
-    }
+    "brick": { "img": "brick.png", "name": "Brick" },
+    "crusher": { "img": "crusher.png", "name": "Crusher" },
+    "crystal": { "img": "crystal.png", "name": "Crystal" },
+    "dust": { "img": "dust.png", "name": "Dust" },
+    "goo": { "img": "goo.png", "name": "Goo" },
+    "plank": { "img": "plank.png", "name": "Compressed Dust" },
+    "slime": { "img": "slime.png", "name": "Slime" },
+    "slimebrick": { "img": "slimebrick.png", "name": "Slime Brick" },
+    "stick": { "img": "stick.png", "name": "Stick" },
+    "wand": { "img": "wand.png", "name": "Magic Wand" }
 }

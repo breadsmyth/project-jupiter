@@ -1,4 +1,11 @@
 {
     "brick": [ "goo", "goo" ],
-    "crusher": [ "brick", "brick" ]
+    "crusher": [ "brick", "brick" ],
+    "crystal": [ "slimebrick", "slimebrick" ],
+    "dust": [ "brick", "crusher" ],
+    "plank": [ "dust", "dust" ],
+    "slime": [ "crusher", "goo" ],
+    "slimebrick": [ "slime", "slime" ],
+    "stick": [ "plank", "plank" ],
+    "wand": [ "crystal", "stick" ]
 }

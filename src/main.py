@@ -1,3 +1,5 @@
+import os
+
 import pygame
 
 import audio
@@ -28,6 +30,9 @@ pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode(resolution, display_flags)
 pygame.display.set_caption(constants.WINDOW_TITLE)
+
+icon = pygame.image.load(os.path.join('assets', 'img', 'icon.png'))
+pygame.display.set_icon(icon)
 
 pygame.mouse.set_visible(False)
 
