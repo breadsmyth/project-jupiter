@@ -5,6 +5,7 @@ import constants
 import game.craft
 import game.item
 import draw.button
+import draw.sprite
 import gamestate
 
 
@@ -16,6 +17,13 @@ def on_left_click(slot_name):
         # clkicked on an empty slot
         if gamestate.mouse_item is not None:
             # putting down an item
+
+            # special logic, delete all items from trash
+            if slot.name == 'trash':
+                gamestate.mouse_item = None
+                audio.play('trash.ogg')
+                return
+
             gamestate.mouse_item.slot_id = slot_name
             gamestate.mouse_item = None
             audio.play('put.ogg')
@@ -106,3 +114,15 @@ class Slot(draw.button.Button):
                 return item
         else:
             return None
+
+
+class TrashSlot(Slot):
+    def __init__(self, name, pos):
+        super().__init__(name, pos)
+        self.surf = draw.sprite.load('trash.png')
+        self.surf = pygame.transform.scale(
+            self.surf,
+            (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
+
+    def draw(self, surf):
+        surf.blit(self.surf, self.pos)

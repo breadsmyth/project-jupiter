@@ -20,6 +20,9 @@ def init():
     INV_WIDTH = constants.RESOLUTION[0]
     INV_HEIGHT = constants.RESOLUTION[1] // 3
 
+    GAME_AREA_WIDTH = constants.RESOLUTION[0]
+    GAME_AREA_HEIGHT = constants.RESOLUTION[1] - INV_HEIGHT
+
     global INV_LEFT
     INV_LEFT = 0
 
@@ -43,8 +46,8 @@ def init():
     # Create infinite source of Goo
     global source_pos
     source_pos = (
-        constants.RESOLUTION[0] // 2 - constants.UI_SLOT_HEIGHT // 2,
-        INV_HEIGHT - constants.UI_SLOT_HEIGHT // 2)
+        GAME_AREA_WIDTH // 2 - constants.UI_SLOT_HEIGHT // 2,
+        GAME_AREA_HEIGHT // 2 - constants.UI_SLOT_HEIGHT // 2)
     draw.slot.Slot(f'source', source_pos)
 
     global source_decoration
@@ -54,6 +57,12 @@ def init():
         (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
 
     game.item.ItemStack('goo', 'source')
+
+    # Create trash slot
+    trash_pos = (
+        GAME_AREA_WIDTH - constants.UI_SLOT_HEIGHT - constants.UI_GAP,
+        GAME_AREA_HEIGHT - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
+    draw.slot.TrashSlot('trash', trash_pos)
 
     # Initialize
     draw.tooltip.init()
