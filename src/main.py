@@ -35,13 +35,11 @@ clock = pygame.time.Clock()
 
 # initialize everything else
 audio.init()
-event.init()
 draw.text.init()
+event.init()
 
 context.handler.init()
 
-
-# Test code
 
 # main window loop
 while gamestate.running:
@@ -50,8 +48,8 @@ while gamestate.running:
     event.handle(pygame.event.get())
 
     context.handler.handle(screen)
-
-    event.draw_cursor(screen)
+    
+    event.do_drawables(screen)
 
     pygame.display.flip()
     gamestate.time_elapsed += clock.tick(constants.FPS)

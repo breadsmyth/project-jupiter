@@ -3,12 +3,23 @@ import pygame
 import audio
 import gamestate
 import draw.sprite
+import draw.tooltip
 
 
 
 keys_pressed = {}
 
-def draw_cursor(screen):
+def do_drawables(screen):
+    # draw tooltip
+    for slot in gamestate.slots.values():
+        if slot.is_moused():
+            item = slot.get_item()
+            if item is not None:
+                draw.tooltip.draw_tooltip(screen, item.item_id)
+
+            break
+
+    # draw the cursor
     mouse_pos = pygame.mouse.get_pos()
     screen.blit(cursor_img, mouse_pos)
 
@@ -56,6 +67,8 @@ def handle(events):
 def init():
     global cursor_img
     cursor_img = draw.sprite.load('cursor.png')
+
+    draw.tooltip.init()
 
 
 def is_pressed(key):
