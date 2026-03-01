@@ -1,11 +1,4 @@
 from enum import Enum, auto
-import subprocess
-
-
-current_hash = subprocess.run(
-    ['git', 'rev-parse', '--short', 'HEAD'],
-    capture_output=True,
-    text=True).stdout[:-1]
 
 
 class Color:
@@ -28,9 +21,9 @@ class Context(Enum):
 
 FPS = 30
 RESOLUTION = (800, 800)
-TITLE = 'Project Jupiter'
+TITLE = 'ZMYTH'
 WINDOW_SCALE = 1
-WINDOW_TITLE = f'{TITLE} ({current_hash})'
+WINDOW_TITLE = f'{TITLE} (demo)'
 
 def ui_init():
     global UI_GAP
