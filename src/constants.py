@@ -14,6 +14,7 @@ class Color:
 
 
 class Context(Enum):
+    CREDITS = auto()
     MAIN = auto()
     SPLASH = auto()
     TITLE = auto()

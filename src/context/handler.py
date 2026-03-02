@@ -1,5 +1,5 @@
 import constants
-from context import gameplay, splash, title
+from context import credits, gameplay, splash, title
 import gamestate
 
 
@@ -9,6 +9,8 @@ def change_context(new_context):
 
 def handle(screen):
     match gamestate.current_context:
+        case constants.Context.CREDITS:
+            credits.do(screen)
         case constants.Context.MAIN:
             gameplay.do(screen)
         case constants.Context.SPLASH:
@@ -21,6 +23,7 @@ def init():
     for context in constants.Context:
         gamestate.ui_buttons[context] = []
 
+    credits.init()
     gameplay.init()
     splash.init()
     title.init()
