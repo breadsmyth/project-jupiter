@@ -140,7 +140,19 @@ def make_surf_me():
     surf = pygame.Surface(
         (CREDIT_WIDTH, CREDIT_HEIGHT),
         flags=pygame.SRCALPHA)
-    surf.fill(constants.Color.WHITE)
+
+    img_width = CREDIT_WIDTH // 3
+    img_top = (TEXT_OFFSET * constants.WINDOW_SCALE - img_width) // 2
+
+    img = draw.sprite.load('me.png')
+    img = pygame.transform.scale(img, (img_width, img_width))
+
+    surf.blit(img, (img_width, img_top))
+
+    text = draw.text.Text('Everything else: me', TEXT_SIZE)
+    text.draw(surf, ((
+        (CREDIT_WIDTH - text.width) // 2) // constants.WINDOW_SCALE,
+        TEXT_OFFSET))
 
     return surf
 
