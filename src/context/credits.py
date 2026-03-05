@@ -7,6 +7,9 @@ import draw.sprite
 import draw.text
 
 
+TEXT_OFFSET = 230
+TEXT_SIZE = 50
+
 def init():
     global CREDIT_WIDTH
     CREDIT_WIDTH = constants.RESOLUTION[0] // 2
@@ -34,7 +37,7 @@ def init():
         context.handler.change_context(constants.Context.TITLE)
 
     global btn_back
-    back_text = draw.text.Text('Back', 50)
+    back_text = draw.text.Text('Back', TEXT_SIZE)
     btn_back = draw.button.Text_Button(
         text_surf=back_text,
         pos=(
@@ -58,10 +61,10 @@ def make_surf_pygame():
     
     surf.blit(img, (constants.UI_GAP, 50 * constants.WINDOW_SCALE))
 
-    text = draw.text.Text('Engine: pygame', 50)
+    text = draw.text.Text('Engine: pygame', TEXT_SIZE)
     text.draw(surf, ((
         (CREDIT_WIDTH - text.width) // 2) // constants.WINDOW_SCALE,
-        230))
+        TEXT_OFFSET))
 
     return surf
 
@@ -69,7 +72,47 @@ def make_surf_font():
     surf = pygame.Surface(
         (CREDIT_WIDTH, CREDIT_HEIGHT),
         flags=pygame.SRCALPHA)
-    surf.fill(constants.Color.FG)
+    
+    IMG_GAP_X = 80 * constants.WINDOW_SCALE
+    IMG_GAP_Y = 30 * constants.WINDOW_SCALE
+
+    IMG_WIDTH = CREDIT_WIDTH - 2 * IMG_GAP_X
+    IMG_HEIGHT = TEXT_OFFSET * constants.WINDOW_SCALE - 2 * IMG_GAP_Y
+
+    surf.fill(
+        color=constants.Color.FG,
+        rect=pygame.Rect(
+            IMG_GAP_X,
+            IMG_GAP_Y,
+            IMG_WIDTH // 2,
+            IMG_HEIGHT))
+
+    letter_A = draw.text.Text(
+        'A',
+        IMG_WIDTH // constants.WINDOW_SCALE,
+        constants.Color.BG)
+    letter_A_pos = (
+        CREDIT_WIDTH // 2 - letter_A.width - constants.UI_GAP,
+        IMG_HEIGHT + IMG_GAP_Y - letter_A.height - constants.UI_GAP)
+
+    letter_a = draw.text.Text(
+        'a',
+        IMG_WIDTH // constants.WINDOW_SCALE)
+    letter_a_pos = (
+        CREDIT_WIDTH // 2 + constants.UI_GAP,
+        IMG_HEIGHT + IMG_GAP_Y - letter_a.height - constants.UI_GAP)
+    
+    letter_A.draw(
+        surf,
+        tuple(dim // constants.WINDOW_SCALE for dim in letter_A_pos))
+    letter_a.draw(
+        surf,
+        tuple(dim // constants.WINDOW_SCALE for dim in letter_a_pos))
+
+    text = draw.text.Text('Font: C&C Red Alert', TEXT_SIZE)
+    text.draw(surf, ((
+        (CREDIT_WIDTH - text.width) // 2) // constants.WINDOW_SCALE,
+        TEXT_OFFSET))
 
     return surf
 
