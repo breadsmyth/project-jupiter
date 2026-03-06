@@ -4,7 +4,7 @@ import os
 import pygame
 
 import constants
-import draw.slot
+import game.slot
 import draw.sprite
 import gamestate
 
@@ -53,7 +53,7 @@ class Item:
             my_slot = None
             for slot in gamestate.ui_buttons[gamestate.current_context]:
                 if (
-                        isinstance(slot, draw.slot.Slot)
+                        isinstance(slot, game.slot.Slot)
                         and slot.name == self.slot_id):
                     my_slot = slot
                     break

@@ -3,7 +3,7 @@ import pygame
 import constants
 import game.item
 import gamestate
-import draw.slot
+import game.slot
 import draw.sprite
 import draw.tooltip
 
@@ -41,14 +41,14 @@ def init():
             y = INV_TOP + constants.UI_GAP + row * (constants.UI_SLOT_HEIGHT + constants.UI_GAP)
             id = col + 5*row
 
-            draw.slot.Slot(f'inv_{id}', (x, y))
+            game.slot.Slot(f'inv_{id}', (x, y))
     
     # Create infinite source of Goo
     global source_pos
     source_pos = (
         GAME_AREA_WIDTH // 2 - constants.UI_SLOT_HEIGHT // 2,
         GAME_AREA_HEIGHT // 2 - constants.UI_SLOT_HEIGHT // 2)
-    draw.slot.Slot(f'source', source_pos)
+    game.slot.Slot(f'source', source_pos)
 
     global source_decoration
     source_decoration = draw.sprite.load('slot_decoration.png')
@@ -62,7 +62,7 @@ def init():
     trash_pos = (
         GAME_AREA_WIDTH - constants.UI_SLOT_HEIGHT - constants.UI_GAP,
         GAME_AREA_HEIGHT - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
-    draw.slot.TrashSlot('trash', trash_pos)
+    game.slot.TrashSlot('trash', trash_pos)
 
     # Initialize
     draw.tooltip.init()
