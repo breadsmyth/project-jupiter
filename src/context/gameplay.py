@@ -52,8 +52,8 @@ def init():
 
     # Create trash slot
     trash_pos = (
-        GAME_AREA_WIDTH - constants.UI_SLOT_HEIGHT - constants.UI_GAP,
-        GAME_AREA_HEIGHT - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
+        constants.RESOLUTION[0] - constants.UI_SLOT_HEIGHT - constants.UI_GAP,
+        constants.RESOLUTION[1] - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
     game.slot.TrashSlot('trash', trash_pos)
 
     # Initialize
