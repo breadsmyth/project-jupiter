@@ -17,11 +17,16 @@ def draw(screen, image, pos):
 
 
 def load(filename):
+    image = load_without_scaling(filename)
+
+    if gamestate.config['hidpi']:
+        image = pygame.transform.scale_by(image, constants.WINDOW_SCALE)
+
+    return image
+
+def load_without_scaling(filename):
     filepath = os.path.join(IMG_PATH, filename)
     image = pygame.image.load(filepath)
     image.convert_alpha()
-
-    if gamestate.config['hidpi']:
-        image = pygame.transform.scale_by(image, 2)
 
     return image
