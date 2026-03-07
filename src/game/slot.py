@@ -9,6 +9,9 @@ import draw.sprite
 import gamestate
 
 
+# TODO isinstance is bad, maybe rethink logic
+
+
 def item_pickup(slot):
     item = slot.get_item()
 
@@ -17,8 +20,8 @@ def item_pickup(slot):
     audio.play('pickup.ogg')
 
     # special logic, refill the source
-    if slot.name == 'source':
-        game.item.Item('goo', 'source')
+    if isinstance(slot, Source):
+        slot.spawn()
 
 
 def item_put(slot):
@@ -63,7 +66,7 @@ def on_left_click(slot_name):
         return
 
     # special logic, can't put items into the source
-    if slot.name == 'source': return
+    if isinstance(slot, Source): return
 
     # check for craft
     result = game.craft.check(
@@ -132,6 +135,26 @@ class Slot(draw.button.Button):
                 return item
         else:
             return None
+
+
+class Source(Slot):
+    def __init__(self, name, pos, item_id):
+        super().__init__(name, pos)
+        self.item_id = item_id
+
+        # Add decoration to slot
+        decoration = draw.sprite.load('slot_decoration.png')
+        decoration = pygame.transform.scale(
+            decoration,
+            (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
+        
+        self.surf.blit(decoration, (0, 0))
+
+        # Spawn the item once
+        self.spawn()
+    
+    def spawn(self):
+        game.item.Item(self.item_id, self.name)
 
 
 class TrashSlot(Slot):

@@ -48,15 +48,7 @@ def init():
     source_pos = (
         GAME_AREA_WIDTH // 2 - constants.UI_SLOT_HEIGHT // 2,
         GAME_AREA_HEIGHT // 2 - constants.UI_SLOT_HEIGHT // 2)
-    game.slot.Slot(f'source', source_pos)
-
-    global source_decoration
-    source_decoration = draw.sprite.load('slot_decoration.png')
-    source_decoration = pygame.transform.scale(
-        source_decoration,
-        (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
-
-    game.item.Item('goo', 'source')
+    game.slot.Source(f'source_goo', source_pos, 'goo')
 
     # Create trash slot
     trash_pos = (
@@ -79,13 +71,6 @@ def do(screen):
         item = slot.get_item()
         if item is not None:
             item.draw(screen)
-
-    # Draw slot decorations
-    # For now, just source
-    draw.sprite.draw(
-        screen=screen,
-        image=source_decoration,
-        pos=tuple(dim // constants.WINDOW_SCALE for dim in source_pos))
     
     # Draw mouse item
     if gamestate.mouse_item is not None:
