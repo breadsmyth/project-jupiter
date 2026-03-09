@@ -9,13 +9,22 @@ import draw.sprite
 import gamestate
 
 
-with open(os.path.join('assets', 'data', 'items.json')) as file:
-    item_dict = json.loads(file.read())
-
-with open(os.path.join('assets', 'data', 'tools.json')) as file:
-    tools = json.loads(file.read())
-
 TOOL_SCALE = 24
+
+def init():
+    global item_dict
+    with open(os.path.join('assets', 'data', 'items.json')) as file:
+        item_dict = json.loads(file.read())
+
+    global tools
+    with open(os.path.join('assets', 'data', 'tools.json')) as file:
+        tools = json.loads(file.read())
+    
+    global tool_sprite
+    tool_sprite = draw.sprite.load_without_scaling('tool.png')
+    tool_sprite = pygame.transform.scale(
+        tool_sprite,
+        (TOOL_SCALE, TOOL_SCALE))
 
 
 def get_name(item_id):
@@ -28,11 +37,6 @@ def get_img(item_id):
         constants.UI_ITEM_HEIGHT, constants.UI_ITEM_HEIGHT))
     
     if is_tool(item_id):
-        tool_sprite = draw.sprite.load_without_scaling('tool.png')
-        tool_sprite = pygame.transform.scale(
-            tool_sprite,
-            (TOOL_SCALE, TOOL_SCALE))
-
         sprite.blit(tool_sprite, (
             constants.UI_ITEM_HEIGHT - TOOL_SCALE,
             constants.UI_ITEM_HEIGHT - TOOL_SCALE))

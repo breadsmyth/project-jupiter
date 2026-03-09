@@ -1,10 +1,9 @@
 import pygame
 
 import constants
-import game.item
 import gamestate
+import game.item
 import game.slot
-import draw.sprite
 import draw.tooltip
 
 
@@ -28,6 +27,10 @@ def init():
 
     global INV_TOP
     INV_TOP = INV_HEIGHT * 2
+
+    # Initialize
+    game.item.init()
+    draw.tooltip.init()
 
     inv_panel = pygame.Surface((INV_WIDTH, INV_HEIGHT))
 
@@ -55,9 +58,6 @@ def init():
         constants.RESOLUTION[0] - constants.UI_SLOT_HEIGHT - constants.UI_GAP,
         constants.RESOLUTION[1] - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
     game.slot.TrashSlot('trash', trash_pos)
-
-    # Initialize
-    draw.tooltip.init()
 
 
 def do(screen):
