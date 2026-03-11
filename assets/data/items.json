@@ -4,9 +4,12 @@
     "crystal": { "img": "crystal.png", "name": "Crystal" },
     "dust": { "img": "dust.png", "name": "Dust" },
     "goo": { "img": "goo.png", "name": "Goo" },
-    "plank": { "img": "plank.png", "name": "Compressed Dust" },
+    "green_dust": { "img": "green_dust.png", "name": "Magic Dust" },
+    "green_plank": { "img": "green_plank.png", "name": "Magic Plank" },
+    "ooze": { "img": "ooze.png", "name": "Ooze" },
+    "plank": { "img": "plank.png", "name": "Plank" },
     "slime": { "img": "slime.png", "name": "Slime" },
     "slimebrick": { "img": "slimebrick.png", "name": "Slime Brick" },
-    "stick": { "img": "stick.png", "name": "Stick" },
+    "stick": { "img": "stick.png", "name": "Staff" },
     "wand": { "img": "wand.png", "name": "Magic Wand" }
 }
