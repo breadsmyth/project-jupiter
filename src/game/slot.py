@@ -75,11 +75,22 @@ def on_left_click(slot_name):
     
     if result is not None:
         # do the craft
-        gamestate.mouse_item.delete()
-        item.delete()
+        if game.item.is_tool(gamestate.mouse_item.item_id):
+            item.delete()
+            game.item.Item(result, slot.name)
+            audio.play('use_tool.ogg')
+        
+        elif game.item.is_tool(item.item_id):
+            gamestate.mouse_item.delete()
+            new_item = game.item.Item(result, 'mouse')
+            gamestate.mouse_item = new_item
+            audio.play('use_tool.ogg')
 
-        game.item.Item(result, slot.name)
-        audio.play('put.ogg')
+        else:
+            item.delete()
+            gamestate.mouse_item.delete()
+            game.item.Item(result, slot.name)
+            audio.play('put.ogg')
     else:
         item_swap(slot)
 
