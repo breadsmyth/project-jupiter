@@ -5,6 +5,7 @@ import pygame
 import audio
 import constants
 import context.handler
+import disk
 import draw.text
 import event
 import gamestate
@@ -45,6 +46,8 @@ event.init()
 
 context.handler.init()
 
+# load data if it exists
+disk.load()
 
 # main window loop
 while gamestate.running:
@@ -58,3 +61,5 @@ while gamestate.running:
 
     pygame.display.flip()
     gamestate.time_elapsed += clock.tick(constants.FPS)
+
+disk.save()
