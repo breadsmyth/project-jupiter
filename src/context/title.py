@@ -20,7 +20,7 @@ def init():
     BTN_LEFT = constants.RESOLUTION[0] // 4
 
     global START_BTN
-    START_TEXT = draw.text.Text('Start', 50)
+    START_TEXT = draw.text.Text('Play', 50)
     START_BTN = draw.button.Text_Button(
         text_surf=START_TEXT,
         pos=(BTN_LEFT, 400 * constants.WINDOW_SCALE),

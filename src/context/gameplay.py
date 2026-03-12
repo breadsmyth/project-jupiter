@@ -1,6 +1,9 @@
 import pygame
 
 import constants
+import context.handler
+import draw.button
+import draw.sprite
 import gamestate
 import game.item
 import game.slot
@@ -59,13 +62,37 @@ def init():
         constants.RESOLUTION[1] - constants.UI_SLOT_HEIGHT - constants.UI_GAP)
     game.slot.TrashSlot('trash', trash_pos)
 
+    # Create back button
+    def back_event():
+        context.handler.change_context(constants.Context.TITLE)
+    
+    global back_pos
+    back_pos = (constants.UI_GAP, constants.UI_GAP)
+    back_size = (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT)
+
+    back_btn = draw.button.Button(
+        pos=back_pos,
+        size=back_size,
+        event=back_event,
+        context=constants.Context.MAIN,
+        audio='blip.ogg')
+    
+    global back_arrow
+    back_arrow = draw.sprite.load('back.png')
+    back_arrow = pygame.transform.scale(back_arrow, back_size)
+
 
 def do(screen):
+    # Draw back button
+    screen.blit(back_arrow, back_pos)
+
     # Draw inventory panel
     screen.blit(inv_panel, (INV_LEFT, INV_TOP))
 
     # Draw all inventory slots
     for slot in gamestate.ui_buttons[constants.Context.MAIN]:
+        if not isinstance(slot, game.slot.Slot): continue
+
         slot.draw(screen)
 
         item = slot.get_item()
