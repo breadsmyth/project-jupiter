@@ -1,14 +1,13 @@
 {
     "brick": [ "goo", "goo" ],
     "crusher": [ "brick", "brick" ],
-    "crystal": [ "slimebrick", "slimebrick" ],
     "dust": [ "brick", "crusher" ],
-    "green_dust": ["dust", "wand"],
-    "green_plank": ["green_dust", "green_dust"],
-    "ooze": ["goo", "wand"],
-    "plank": [ "dust", "dust" ],
+    "form": [ "ring", "ring" ],
+    "kiln": [ "rock", "rock" ],
+    "ooze": [ "slimebrick", "slimebrick" ],
+    "plank": [ "dust", "kiln" ],
+    "ring": [ "plank", "plank" ],
+    "rock": [ "dust", "dust" ],
     "slime": [ "crusher", "goo" ],
-    "slimebrick": [ "slime", "slime" ],
-    "stick": [ "plank", "plank" ],
-    "wand": [ "crystal", "stick" ]
+    "slimebrick": [ "slime", "slime" ]
 }
