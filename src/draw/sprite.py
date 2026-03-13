@@ -27,6 +27,6 @@ def load(filename):
 def load_without_scaling(filename):
     filepath = os.path.join(IMG_PATH, filename)
     image = pygame.image.load(filepath)
-    image.convert_alpha()
+    image = image.convert_alpha()
 
     return image
