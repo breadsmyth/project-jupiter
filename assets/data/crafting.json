@@ -3,6 +3,7 @@
     "crusher": [ "brick", "brick" ],
     "dust": [ "brick", "crusher" ],
     "form": [ "ring", "ring" ],
+    "injector": [ "form", "ooze" ],
     "kiln": [ "rock", "rock" ],
     "ooze": [ "slimebrick", "slimebrick" ],
     "plank": [ "dust", "kiln" ],

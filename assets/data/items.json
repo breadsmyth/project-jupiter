@@ -7,6 +7,7 @@
     "goo": { "img": "goo.png", "name": "Goo" },
     "green_dust": { "img": "green_dust.png", "name": "Magic Dust" },
     "green_plank": { "img": "green_plank.png", "name": "Magic Plank" },
+    "injector": { "img": "injector.png", "name": "Slime Injector" },
     "kiln": { "img": "kiln.png", "name": "Kiln" },
     "ooze": { "img": "ooze.png", "name": "Plastic" },
     "plank": { "img": "plank.png", "name": "Metal" },

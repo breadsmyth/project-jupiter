@@ -1,6 +1,8 @@
 import json
 import os
 
+import game.progress
+
 
 with open(os.path.join('assets', 'data', 'crafting.json')) as file:
     crafting_dict = json.loads(file.read())
@@ -12,6 +14,7 @@ def check(item_id_a, item_id_b):
     
     for result, ingredients in crafting_dict.items():
         if ingredients[0] == item_id_a and ingredients[1] == item_id_b:
+            game.progress.check_unlock(result)
             return result
     
     return None

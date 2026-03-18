@@ -20,6 +20,10 @@ class Context(Enum):
     TITLE = auto()
 
 
+class ProgressFlag(Enum):
+    SLIME = auto()
+
+
 FPS = 30
 RESOLUTION = (800, 800)
 TITLE = 'ZMYTH'
