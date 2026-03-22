@@ -2,9 +2,13 @@
     "brick": [ "goo", "goo" ],
     "crusher": [ "brick", "brick" ],
     "dust": [ "brick", "crusher" ],
+    "freezer": [ "sculpture", "sculpture" ],
     "ice": [ "water", "water" ],
     "ice_brick": [ "ice", "ice" ],
-    "ice_crusher": [ "ice_brick", "ice_brick" ],
+    "ice_crusher": [ "pure_ice", "pure_ice" ],
     "kiln": [ "plank", "plank" ],
-    "plank": [ "dust", "dust" ]
+    "plank": [ "dust", "dust" ],
+    "pure_ice": [ "freezer", "sculpture" ],
+    "ring": [ "kiln", "plank" ],
+    "sculpture": [ "ice_brick", "ice_brick" ]
 }

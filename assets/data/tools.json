@@ -1,6 +1,7 @@
 [
-    ["ice_crusher", -1],
     ["crusher", 5],
+    ["freezer", 5],
+    ["ice_crusher", -1],
     ["kiln", 5],
     ["wand", -1]
 ]
