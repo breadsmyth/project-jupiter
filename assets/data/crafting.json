@@ -2,14 +2,9 @@
     "brick": [ "goo", "goo" ],
     "crusher": [ "brick", "brick" ],
     "dust": [ "brick", "crusher" ],
-    "form": [ "ring", "ring" ],
     "ice": [ "water", "water" ],
-    "injector": [ "form", "ooze" ],
-    "kiln": [ "rock", "rock" ],
-    "ooze": [ "slimebrick", "slimebrick" ],
-    "plank": [ "dust", "kiln" ],
-    "ring": [ "plank", "plank" ],
-    "rock": [ "dust", "dust" ],
-    "slime": [ "crusher", "goo" ],
-    "slimebrick": [ "slime", "slime" ]
+    "ice_brick": [ "ice", "ice" ],
+    "ice_crusher": [ "ice_brick", "ice_brick" ],
+    "kiln": [ "plank", "plank" ],
+    "plank": [ "dust", "dust" ]
 }

@@ -9,6 +9,8 @@
     "green_plank": { "img": "green_plank.png", "name": "Magic Plank" },
     "injector": { "img": "injector.png", "name": "Slime Injector" },
     "ice": { "img": "ice.png", "name": "Ice" },
+    "ice_brick": { "img": "ice_brick.png", "name": "Ice Block" },
+    "ice_crusher": { "img": "ice_crusher.png", "name": "Crusher" },
     "kiln": { "img": "kiln.png", "name": "Kiln" },
     "ooze": { "img": "ooze.png", "name": "Plastic" },
     "plank": { "img": "plank.png", "name": "Metal" },
