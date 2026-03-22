@@ -117,7 +117,8 @@ class Tool(Item):
                 constants.UI_ITEM_HEIGHT - constants.UI_GAP
             ) // constants.WINDOW_SCALE)
 
-        self.number_surf.draw(screen, text_pos)
+        if self.num_uses != -1:
+            self.number_surf.draw(screen, text_pos)
     
     def update_text(self):
         self.number_surf = draw.text.Text(
