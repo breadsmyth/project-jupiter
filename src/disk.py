@@ -16,15 +16,21 @@ def load():
     obj = json.loads(data.decode())
 
     for item in obj['items']:
-        game.item.Item(item[0], item[1])
+        if game.item.is_tool(item[0]):
+            game.item.Tool(item[0], item[1], item[2])
+        else:
+            game.item.Item(item[0], item[1])
 
 
 def save():
     obj = { 'items': [] }
 
     for item in gamestate.items:
-        if item.slot_id.startswith('source'): continue
-        obj['items'].append([item.item_id, item.slot_id])
+        # if item.slot_id.startswith('source'): continue
+        if game.item.is_tool(item.item_id):
+            obj['items'].append([item.item_id, item.slot_id, item.num_uses])
+        else:
+            obj['items'].append([item.item_id, item.slot_id])
 
     data = json.dumps(obj, separators=(',', ':')).encode()
     with gzip.open(SAVE_FILE, 'wb') as file:

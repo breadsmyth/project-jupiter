@@ -1,5 +1,5 @@
 [
-    "crusher",
-    "kiln",
-    "wand"
+    ["crusher", 5],
+    ["kiln", 5],
+    ["wand", -1]
 ]

@@ -49,6 +49,14 @@ def item_swap(slot):
     audio.play('pickup.ogg')
 
 
+def new_item(item_id, slot_id):
+    if game.item.is_tool(item_id):
+        num_uses = game.item.get_num_tool_uses(item_id)
+        return game.item.Tool(item_id, slot_id, num_uses)
+
+    return game.item.Item(item_id, slot_id)
+
+
 def on_left_click(slot_name):
     slot = gamestate.slots[slot_name]
     item = slot.get_item()
@@ -65,7 +73,7 @@ def on_left_click(slot_name):
 
     # special logic, can't put items into the source
     if isinstance(slot, Source):
-        print('HOW??')
+        print('game.slot.on_left_click(): Should not be possible')
         return
 
     # check for craft
@@ -77,19 +85,22 @@ def on_left_click(slot_name):
         # do the craft
         if game.item.is_tool(gamestate.mouse_item.item_id):
             item.delete()
-            game.item.Item(result, slot.name)
+            new_item(result, slot.name)
+
+            gamestate.mouse_item.use_once()
             audio.play('use_tool.ogg')
         
         elif game.item.is_tool(item.item_id):
             gamestate.mouse_item.delete()
-            new_item = game.item.Item(result, 'mouse')
-            gamestate.mouse_item = new_item
+            gamestate.mouse_item = new_item(result, 'mouse')
+
+            item.use_once()
             audio.play('use_tool.ogg')
 
         else:
             item.delete()
             gamestate.mouse_item.delete()
-            game.item.Item(result, slot.name)
+            new_item(result, slot.name)
             audio.play('put.ogg')
     else:
         item_swap(slot)
@@ -194,7 +205,7 @@ class Source(Slot):
 
         item_id = random.choices(population, weights)[0]
 
-        gamestate.mouse_item = game.item.Item(item_id, 'mouse')
+        gamestate.mouse_item = new_item(item_id, 'mouse')
         audio.play('pickup.ogg')
 
 

@@ -39,3 +39,6 @@ def ui_init():
 
     global UI_ITEM_HEIGHT
     UI_ITEM_HEIGHT = UI_SLOT_HEIGHT - 4 * UI_GAP
+
+    global UI_TOOL_SCALE
+    UI_TOOL_SCALE = 12 * WINDOW_SCALE

@@ -6,10 +6,9 @@ import pygame
 import constants
 import game.slot
 import draw.sprite
+import draw.text
 import gamestate
 
-
-TOOL_SCALE = 24
 
 def init():
     global item_dict
@@ -24,7 +23,7 @@ def init():
     tool_sprite = draw.sprite.load_without_scaling('tool.png')
     tool_sprite = pygame.transform.scale(
         tool_sprite,
-        (TOOL_SCALE, TOOL_SCALE))
+        (constants.UI_TOOL_SCALE, constants.UI_TOOL_SCALE))
 
 
 def get_name(item_id):
@@ -38,13 +37,20 @@ def get_img(item_id):
     
     if is_tool(item_id):
         sprite.blit(tool_sprite, (
-            constants.UI_ITEM_HEIGHT - TOOL_SCALE,
-            constants.UI_ITEM_HEIGHT - TOOL_SCALE))
+            constants.UI_ITEM_HEIGHT - constants.UI_TOOL_SCALE,
+            constants.UI_ITEM_HEIGHT - constants.UI_TOOL_SCALE))
     
     return sprite
 
 def is_tool(item_id):
-    return item_id in tools
+    return item_id in [elt[0] for elt in tools]
+
+def get_num_tool_uses(item_id):
+    for elt in tools:
+        if elt[0] == item_id:
+            return elt[1]
+    
+    raise KeyError(f'{item_id} is not a tool!')
 
 MOUSE_OFFSET = 20
 
@@ -66,6 +72,13 @@ class Item:
         gamestate.items.remove(self)
     
     def draw(self, screen):
+        pos = self.get_pos()
+        draw.sprite.draw(
+            screen,
+            self.sprite,
+            tuple(dim + constants.UI_GAP for dim in pos))
+    
+    def get_pos(self):
         pos = (0, 0)
 
         if self.slot_id == 'mouse':
@@ -84,10 +97,42 @@ class Item:
             
             pos = my_slot.pos
 
-        pos = tuple(dim // constants.WINDOW_SCALE for dim in pos)
+        return tuple(dim // constants.WINDOW_SCALE for dim in pos)
 
-        draw.sprite.draw(
-            screen,
-            self.sprite,
-            tuple(dim + constants.UI_GAP for dim in pos))
 
+class Tool(Item):
+    def __init__(self, item_id, slot_id, num_uses):
+        super().__init__(item_id, slot_id)
+        self.num_uses = num_uses
+        self.update_text()
+
+    
+    def draw(self, screen):
+        super().draw(screen)
+        
+        text_pos = self.get_pos()
+        text_pos = (
+            text_pos[0] + (2*constants.UI_GAP) // constants.WINDOW_SCALE,
+            text_pos[1] + (
+                constants.UI_ITEM_HEIGHT - constants.UI_GAP
+            ) // constants.WINDOW_SCALE)
+
+        self.number_surf.draw(screen, text_pos)
+    
+    def update_text(self):
+        self.number_surf = draw.text.Text(
+            text=str(self.num_uses),
+            size=24,
+            color=constants.Color.WHITE,
+            shadow_color=constants.Color.BLACK,
+            shadow_distance=1)
+
+    def use_once(self):
+        if self.num_uses == -1: return
+
+        self.num_uses -= 1
+        if self.num_uses == 0:
+            self.delete()
+            return
+        
+        self.update_text()
