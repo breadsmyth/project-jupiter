@@ -1,3 +1,5 @@
+import random
+
 import pygame
 
 import audio
@@ -18,10 +20,6 @@ def item_pickup(slot):
     gamestate.mouse_item = item
     item.slot_id = 'mouse'
     audio.play('pickup.ogg')
-
-    # special logic, refill the source
-    if isinstance(slot, Source):
-        slot.spawn()
 
 
 def item_put(slot):
@@ -66,7 +64,9 @@ def on_left_click(slot_name):
         return
 
     # special logic, can't put items into the source
-    if isinstance(slot, Source): return
+    if isinstance(slot, Source):
+        print('HOW??')
+        return
 
     # check for craft
     result = game.craft.check(
@@ -149,9 +149,9 @@ class Slot(draw.button.Button):
 
 
 class Source(Slot):
-    def __init__(self, name, pos, item_id):
+    def __init__(self, name, pos, results):
         super().__init__(name, pos)
-        self.item_id = item_id
+        self.results = results
 
         # Add decoration to slot
         decoration = draw.sprite.load('slot_decoration.png')
@@ -159,13 +159,43 @@ class Source(Slot):
             decoration,
             (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT))
         
+        plus = draw.sprite.load('plus.png')
+        self.plus = pygame.transform.scale(
+            plus,
+            (constants.UI_ITEM_HEIGHT, constants.UI_ITEM_HEIGHT))
+        
         self.surf.blit(decoration, (0, 0))
 
-        # Spawn the item once
-        self.spawn()
+        def on_left_click():
+            self.spawn()
+        
+        self.event = on_left_click
+
+    def draw(self, surf):
+        bg_color = constants.Color.BG
+        if self.is_moused():
+            bg_color = constants.Color.BG_ACTIVE
+        
+        self.inner_surf.fill(bg_color)
+        self.inner_surf.blit(
+            self.plus,
+            (constants.UI_GAP, constants.UI_GAP))
+
+        surf.blit(self.surf, self.pos)
+        surf.blit(self.inner_surf,
+                  tuple(dim + constants.UI_GAP for dim in self.pos))
     
     def spawn(self):
-        game.item.Item(self.item_id, self.name)
+        if gamestate.mouse_item is not None:
+            return
+
+        population = [elt[0] for elt in self.results]
+        weights = [elt[1] for elt in self.results]
+
+        item_id = random.choices(population, weights)[0]
+
+        gamestate.mouse_item = game.item.Item(item_id, 'mouse')
+        audio.play('pickup.ogg')
 
 
 class TrashSlot(Slot):

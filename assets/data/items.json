@@ -8,6 +8,7 @@
     "green_dust": { "img": "green_dust.png", "name": "Magic Dust" },
     "green_plank": { "img": "green_plank.png", "name": "Magic Plank" },
     "injector": { "img": "injector.png", "name": "Slime Injector" },
+    "ice": { "img": "ice.png", "name": "Ice" },
     "kiln": { "img": "kiln.png", "name": "Kiln" },
     "ooze": { "img": "ooze.png", "name": "Plastic" },
     "plank": { "img": "plank.png", "name": "Metal" },
@@ -16,5 +17,6 @@
     "slime": { "img": "slime.png", "name": "Paste" },
     "slimebrick": { "img": "slimebrick.png", "name": "Tar" },
     "stick": { "img": "stick.png", "name": "Staff" },
-    "wand": { "img": "wand.png", "name": "Magic Wand" }
+    "wand": { "img": "wand.png", "name": "Magic Wand" },
+    "water": { "img": "water.png", "name": "Water" }
 }
