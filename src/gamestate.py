@@ -15,9 +15,6 @@ def init():
     global mouse_item
     mouse_item = None
 
-    global progress_flags
-    progress_flags = {}
-
     global running
     running = True
 
