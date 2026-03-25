@@ -24,6 +24,10 @@ def init():
     tool_sprite = pygame.transform.scale(
         tool_sprite,
         (constants.UI_TOOL_SCALE, constants.UI_TOOL_SCALE))
+    
+    global wells
+    with open(os.path.join('assets', 'data', 'wells.json')) as file:
+        wells = json.loads(file.read())
 
 
 def get_name(item_id):
@@ -51,6 +55,16 @@ def get_num_tool_uses(item_id):
             return elt[1]
     
     raise KeyError(f'{item_id} is not a tool!')
+
+def is_well(item_id):
+    return item_id in [elt[0] for elt in wells]
+
+def get_well_result(item_id):
+    for elt in wells:
+        if elt[0] == item_id:
+            return elt[1]
+
+    raise KeyError(f'{item_id} is not a well!')
 
 MOUSE_OFFSET = 20
 

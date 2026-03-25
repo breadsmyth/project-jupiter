@@ -11,9 +11,6 @@ import draw.sprite
 import gamestate
 
 
-# TODO isinstance is bad, maybe rethink logic
-
-
 def item_pickup(slot):
     item = slot.get_item()
 
@@ -30,6 +27,10 @@ def item_put(slot):
         gamestate.mouse_item.delete()
         audio.play('trash.ogg')
         return
+    
+    # special logic, only put Well into WellSlot
+    if isinstance(slot, WellSlot):
+        if not game.item.is_well(gamestate.mouse_item.item_id): return
 
     gamestate.mouse_item.slot_id = slot.name
     gamestate.mouse_item = None
@@ -41,6 +42,10 @@ def item_swap(slot):
         raise Exception('Tried to swap without holding an item')
 
     item = slot.get_item()
+
+    # special logic, only put Well into WellSlot
+    if isinstance(slot, WellSlot):
+        if not game.item.is_well(gamestate.mouse_item.item_id): return
 
     temp = gamestate.mouse_item
     gamestate.mouse_item = item
@@ -219,3 +224,27 @@ class TrashSlot(Slot):
 
     def draw(self, surf):
         surf.blit(self.surf, self.pos)
+
+class WellSlot(Slot):
+    def __init__(self, name, pos):
+        super().__init__(name, pos)
+    
+    def draw(self, surf):
+        if self.get_item() is None:
+            if gamestate.mouse_item is None: return
+            if not game.item.is_well(gamestate.mouse_item.item_id): return
+
+        outline_color = constants.Color.GREEN
+        if self.get_item() is not None:
+            outline_color = constants.Color.FG
+
+        bg_color = constants.Color.BG
+        if self.is_moused():
+            bg_color = constants.Color.BG_ACTIVE
+
+        self.surf.fill(outline_color)
+        self.inner_surf.fill(bg_color)
+
+        surf.blit(self.surf, self.pos)
+        surf.blit(self.inner_surf,
+                  tuple(dim + constants.UI_GAP for dim in self.pos))

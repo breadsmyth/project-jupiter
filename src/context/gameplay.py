@@ -50,12 +50,23 @@ def init():
             game.slot.Slot(f'inv_{id}', (x, y))
     
     # Create infinite random source
-    global source_pos
     source_pos = (
         GAME_AREA_WIDTH // 2 - constants.UI_SLOT_HEIGHT // 2,
         GAME_AREA_HEIGHT // 2 - constants.UI_SLOT_HEIGHT // 2)
     game.slot.Source(f'source_1', source_pos, [
         ('goo', 3), ('water', 1)])
+    
+    # Create well slots
+    well_pos_0 = (
+        GAME_AREA_WIDTH // 4 - constants.UI_SLOT_HEIGHT // 2,
+        3*GAME_AREA_HEIGHT // 4 - constants.UI_SLOT_HEIGHT // 2)
+    game.slot.WellSlot('well0', well_pos_0)
+
+    well_pos_1 = (
+        3*GAME_AREA_WIDTH // 4 - constants.UI_SLOT_HEIGHT // 2,
+        3*GAME_AREA_HEIGHT // 4 - constants.UI_SLOT_HEIGHT // 2)
+    game.slot.WellSlot('well1', well_pos_1)
+
 
     # Create trash slot
     trash_pos = (
