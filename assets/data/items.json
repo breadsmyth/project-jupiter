@@ -7,14 +7,14 @@
     "freezer": { "img": "freezer.png", "name": "Freezer" },
     "goo": { "img": "goo.png", "name": "Goo" },
     "green_dust": { "img": "green_dust.png", "name": "Magic Dust" },
-    "green_plank": { "img": "green_plank.png", "name": "Magic Plank" },
+    "green_metal": { "img": "green_plank.png", "name": "Magic Metal" },
     "injector": { "img": "injector.png", "name": "Slime Injector" },
     "ice": { "img": "ice.png", "name": "Ice" },
     "ice_brick": { "img": "ice_brick.png", "name": "Ice Block" },
     "ice_crusher": { "img": "ice_crusher.png", "name": "Crusher" },
     "kiln": { "img": "kiln.png", "name": "Kiln" },
+    "metal": { "img": "plank.png", "name": "Metal" },
     "ooze": { "img": "ooze.png", "name": "Plastic" },
-    "plank": { "img": "plank.png", "name": "Metal" },
     "pure_ice": { "img": "pure_ice.png", "name": "Pure Ice" },
     "ring": { "img": "ring.png", "name": "Ring" },
     "rock": { "img": "rock.png", "name": "Rock" },
@@ -23,5 +23,6 @@
     "slimebrick": { "img": "slimebrick.png", "name": "Tar" },
     "stick": { "img": "stick.png", "name": "Staff" },
     "wand": { "img": "wand.png", "name": "Magic Wand" },
-    "water": { "img": "water.png", "name": "Water" }
+    "water": { "img": "water.png", "name": "Water" },
+    "well": { "img": "well.png", "name": "Well" }
 }

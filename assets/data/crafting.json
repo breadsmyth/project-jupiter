@@ -8,8 +8,9 @@
     "ice_crusher": [ "pure_ice", "pure_ice" ],
     "injector": [ "ring", "ring" ],
     "kiln": [ "plank", "plank" ],
-    "plank": [ "dust", "dust" ],
     "pure_ice": [ "freezer", "sculpture" ],
     "ring": [ "kiln", "plank" ],
-    "sculpture": [ "ice_brick", "ice_brick" ]
+    "rock": [ "dust", "dust" ],
+    "sculpture": [ "ice_brick", "ice_brick" ],
+    "well": ["rock", "rock"]
 }

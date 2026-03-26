@@ -165,9 +165,9 @@ class Slot(draw.button.Button):
 
 
 class Source(Slot):
-    def __init__(self, name, pos, results):
+    def __init__(self, name, pos, item_id):
         super().__init__(name, pos)
-        self.results = results
+        self.item_id = item_id
 
         # Add decoration to slot
         decoration = draw.sprite.load('slot_decoration.png')
@@ -205,13 +205,28 @@ class Source(Slot):
         if gamestate.mouse_item is not None:
             return
 
-        population = [elt[0] for elt in self.results]
-        weights = [elt[1] for elt in self.results]
-
-        item_id = random.choices(population, weights)[0]
-
-        gamestate.mouse_item = new_item(item_id, 'mouse')
+        gamestate.mouse_item = new_item(self.item_id, 'mouse')
         audio.play('pickup.ogg')
+
+
+class WellSource(Source):
+    def __init__(self, name, pos):
+        super().__init__(name, pos, None)
+        self.well_slot = name[7:]  # evil
+    
+    def draw(self, surf):
+        if self.get_well_slot().get_item() is None: return
+        super().draw(surf)
+    
+    def get_well_slot(self):
+        return gamestate.slots[self.well_slot]
+
+    def spawn(self):
+        well_item = self.get_well_slot().get_item()
+        if well_item is None: return
+
+        self.item_id = game.item.get_well_result(well_item.item_id)
+        super().spawn()
 
 
 class TrashSlot(Slot):
