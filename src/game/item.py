@@ -90,7 +90,7 @@ class Item:
         draw.sprite.draw(
             screen,
             self.sprite,
-            tuple(dim + constants.UI_GAP for dim in pos))
+            tuple(dim + constants.UI_GAP * 2 for dim in pos))
     
     def get_pos(self):
         pos = (0, 0)
