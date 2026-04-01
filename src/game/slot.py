@@ -245,14 +245,17 @@ class WellSlot(Slot):
         super().__init__(name, pos)
     
     def draw(self, surf):
-        if self.get_item() is None:
-            if gamestate.mouse_item is None: return
-            if not game.item.is_well(gamestate.mouse_item.item_id): return
+        outline_color = constants.Color.FG
 
-        outline_color = constants.Color.GREEN
-        if self.get_item() is not None:
-            outline_color = constants.Color.FG
+        # If well in mouse, draw with green outline
+        if (gamestate.mouse_item is not None
+                and game.item.is_well(gamestate.mouse_item.item_id)):
+            outline_color = constants.Color.GREEN
 
+        elif self.get_item() is None:
+            return
+
+        # Draw
         bg_color = constants.Color.BG
         if self.is_moused():
             bg_color = constants.Color.BG_ACTIVE
