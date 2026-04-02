@@ -1,4 +1,4 @@
 [
-    ["injector", "slime"],
-    ["well", "water"]
+    ["condenser", "water"],
+    ["injector", "slime"]
 ]
