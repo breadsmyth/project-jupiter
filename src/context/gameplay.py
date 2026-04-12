@@ -85,7 +85,7 @@ def init():
     back_pos = (constants.UI_GAP, constants.UI_GAP)
     back_size = (constants.UI_SLOT_HEIGHT, constants.UI_SLOT_HEIGHT)
 
-    back_btn = draw.button.Button(
+    draw.button.Button(
         pos=back_pos,
         size=back_size,
         event=back_event,
@@ -96,10 +96,30 @@ def init():
     back_arrow = draw.sprite.load('back.png')
     back_arrow = pygame.transform.scale(back_arrow, back_size)
 
+    # Create recipes button
+    def recipes_event():
+        context.handler.change_context(constants.Context.RECIPES)
+    
+    global recipes_pos
+    recipes_pos = (constants.RESOLUTION[1] - constants.UI_SLOT_HEIGHT - constants.UI_GAP, constants.UI_GAP)
+    recipes_size = back_size
+
+    draw.button.Button(
+        pos=recipes_pos,
+        size=recipes_size,
+        event=recipes_event,
+        context=constants.Context.MAIN,
+        audio='blip.ogg')
+    
+    global recipe_book
+    recipe_book = draw.sprite.load('book.png')
+    recipe_book = pygame.transform.scale(recipe_book, recipes_size)
+
 
 def do(screen):
-    # Draw back button
+    # Draw buttons
     screen.blit(back_arrow, back_pos)
+    screen.blit(recipe_book, recipes_pos)
 
     # Draw inventory panel
     screen.blit(inv_panel, (INV_LEFT, INV_TOP))

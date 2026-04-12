@@ -1,5 +1,5 @@
 import constants
-from context import credits, gameplay, splash, title
+from context import credits, gameplay, recipes, splash, title
 import gamestate
 
 
@@ -13,6 +13,8 @@ def handle(screen):
             credits.do(screen)
         case constants.Context.MAIN:
             gameplay.do(screen)
+        case constants.Context.RECIPES:
+            recipes.do(screen)
         case constants.Context.SPLASH:
             splash.do(screen)
         case constants.Context.TITLE:
@@ -25,5 +27,6 @@ def init():
 
     credits.init()
     gameplay.init()
+    recipes.init()
     splash.init()
     title.init()
