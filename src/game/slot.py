@@ -225,7 +225,8 @@ class WellSource(Source):
         well_item = self.get_well_slot().get_item()
         if well_item is None: return
 
-        self.item_id = game.item.get_well_result(well_item.item_id)
+        result = game.item.get_well_result(well_item.item_id)
+        self.item_id = random.choice(result)
         super().spawn()
 
 
@@ -239,6 +240,7 @@ class TrashSlot(Slot):
 
     def draw(self, surf):
         surf.blit(self.surf, self.pos)
+
 
 class WellSlot(Slot):
     def __init__(self, name, pos):

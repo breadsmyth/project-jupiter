@@ -1,5 +1,6 @@
 {
     "ash": { "img": "ash.png", "name": "Ash" },
+    "blue_rock": { "img": "blue_rock.png", "name": "Blue Rock" },
     "brick": { "img": "brick.png", "name": "Brick" },
     "condenser": { "img": "condenser.png", "name": "Condenser" },
     "crusher": { "img": "crusher.png", "name": "Crusher" },
@@ -9,6 +10,7 @@
     "freezer": { "img": "freezer.png", "name": "Freezer" },
     "glass": { "img": "glass.png", "name": "Glass" },
     "goo": { "img": "goo.png", "name": "Goo" },
+    "gravel": { "img": "gravel.png", "name": "Gravel" },
     "green_dust": { "img": "green_dust.png", "name": "Magic Dust" },
     "green_metal": { "img": "green_plank.png", "name": "Magic Metal" },
     "injector": { "img": "injector.png", "name": "Slime Injector" },
@@ -19,6 +21,7 @@
     "metal": { "img": "plank.png", "name": "Metal" },
     "ooze": { "img": "ooze.png", "name": "Ooze" },
     "pure_ice": { "img": "pure_ice.png", "name": "Pure Ice" },
+    "red_rock": { "img": "red_rock.png", "name": "Red Rock" },
     "ring": { "img": "ring.png", "name": "Metal Ring" },
     "rock": { "img": "rock.png", "name": "Rock" },
     "sculpture": { "img": "sculpture.png", "name": "Ice Sculpture" },
@@ -28,5 +31,6 @@
     "tar": { "img": "tar.png", "name": "Tar" },
     "wand": { "img": "wand.png", "name": "Magic Wand" },
     "water": { "img": "water.png", "name": "Water" },
-    "well": { "img": "well.png", "name": "Well" }
+    "well": { "img": "well.png", "name": "Well" },
+    "yellow_rock": { "img": "yellow_rock.png", "name": "Yellow Rock" }
 }

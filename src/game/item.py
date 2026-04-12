@@ -62,7 +62,7 @@ def is_well(item_id):
 def get_well_result(item_id):
     for elt in wells:
         if elt[0] == item_id:
-            return elt[1]
+            return elt[1:]
 
     raise KeyError(f'{item_id} is not a well!')
 

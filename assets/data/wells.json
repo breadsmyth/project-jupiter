@@ -1,4 +1,5 @@
 [
     ["condenser", "water"],
+    ["gravel", "blue_rock", "red_rock", "yellow_rock"],
     ["injector", "slime"]
 ]
