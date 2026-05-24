@@ -3,6 +3,7 @@ import pygame
 import constants
 import context
 import draw.button
+import draw.text
 import game.craft
 
 
@@ -40,10 +41,28 @@ def init():
     global search_text
     search_text = ''
 
+    global cached_text
+    cached_text = ''
+
+    global text_obj
+    text_obj = draw.text.Text('', constants.UI_SLOT_HEIGHT)
+
 
 def do(screen):
+    global cached_text
+    global text_obj
+
     back_button.draw(screen)
     screen.blit(search_box, search_pos)
+
+    # Draw search text
+    if cached_text != search_text:
+        text_obj = draw.text.Text(search_text, constants.UI_SLOT_HEIGHT)
+        cached_text = search_text
+
+    text_obj.draw(screen, (
+        search_pos[0] + constants.UI_GAP*2,
+        search_pos[1] + constants.UI_GAP*2))
 
 
 def do_keypress(key):
@@ -56,8 +75,6 @@ def do_keypress(key):
         search_text = search_text[:-1]
     else:
         search_text += char
-    
-    print(search_text)
 
 
 def get_char(key):
