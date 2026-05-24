@@ -1,6 +1,7 @@
 import pygame
 
 import constants
+import draw.sprite
 import gamestate
 
 
@@ -53,6 +54,33 @@ class Button:
     def is_moused(self):
         mouse_pos = pygame.mouse.get_pos()
         return self.rect.collidepoint(mouse_pos)
+
+
+class ImageButton(Button):
+    def __init__(self, image_filename, pos, size, event, context):
+        super().__init__(pos, size, event, context, audio='blip.ogg')
+
+        self.image = draw.sprite.load(image_filename)
+        self.image = pygame.transform.scale(self.image, size)
+        self.image_moused = self.image.copy()
+
+        self.image.fill(
+            color=constants.Color.BUTTON,
+            rect=None,
+            special_flags=pygame.BLEND_RGBA_MULT)
+
+        self.image_moused.fill(
+            color=constants.Color.BG_ACTIVE,
+            rect=None,
+            special_flags=pygame.BLEND_RGBA_MULT)
+    
+    def draw(self, surf):
+        image_to_draw = self.image
+
+        if self.is_moused():
+            image_to_draw = self.image_moused
+        
+        surf.blit(image_to_draw, self.pos)
 
 
 class Text_Button(Button):

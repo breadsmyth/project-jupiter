@@ -4,6 +4,7 @@ from enum import Enum, auto
 class Color:
     BG = (30, 30, 46)
     BG_ACTIVE = (64, 50, 77)
+    BUTTON = (49, 50, 68),
     FG = (205, 214, 244)
     FG_ACTIVE = (234, 238, 250)
 
