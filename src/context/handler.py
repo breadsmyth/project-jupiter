@@ -6,6 +6,10 @@ import gamestate
 def change_context(new_context):
     gamestate.current_context = new_context
 
+    # Clear search text TODO move this logic somewhere else?
+    if new_context == constants.Context.RECIPES:
+        recipes.search_text = ''
+
 
 def handle(screen):
     match gamestate.current_context:

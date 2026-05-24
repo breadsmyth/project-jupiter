@@ -1,8 +1,10 @@
 import pygame
 
 import audio
+import constants
 import gamestate
 import draw.sprite
+import context.recipes
 
 
 keys_pressed = {}
@@ -26,6 +28,10 @@ def handle(events):
                     is_pressed(pygame.K_RCTRL))):
                 # ctrl+esc = quit the program
                 gamestate.running = False
+            
+            # Handle keyboard input
+            if gamestate.current_context == constants.Context.RECIPES:
+                context.recipes.do_keypress(event.key)
 
         elif event.type == pygame.KEYUP:
             keys_pressed[event.key] = False
