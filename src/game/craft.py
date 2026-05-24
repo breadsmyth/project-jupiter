@@ -5,6 +5,7 @@ import os
 with open(os.path.join('assets', 'data', 'alias.json')) as file:
     alias_dict = json.loads(file.read())
 
+global crafting_dict
 with open(os.path.join('assets', 'data', 'crafting.json')) as file:
     crafting_dict = json.loads(file.read())
 

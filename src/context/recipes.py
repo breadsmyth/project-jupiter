@@ -3,11 +3,19 @@ import pygame
 import constants
 import context
 import draw.button
+import draw.sprite
 import draw.text
 import game.craft
+import game.item
 
 
 def init():
+    global plus
+    global equals
+
+    plus = draw.sprite.load('plus.png')
+    equals = draw.sprite.load('equals.png')
+
     # Create back button
     def back_event():
         context.handler.change_context(constants.Context.MAIN)
@@ -47,22 +55,36 @@ def init():
     global text_obj
     text_obj = draw.text.Text('', constants.UI_SLOT_HEIGHT)
 
+    global cached_results
+    cached_results = []
+
 
 def do(screen):
     global cached_text
     global text_obj
+    global cached_results
 
     back_button.draw(screen)
     screen.blit(search_box, search_pos)
 
-    # Draw search text
     if cached_text != search_text:
+        # Update caches
         text_obj = draw.text.Text(search_text, constants.UI_SLOT_HEIGHT)
         cached_text = search_text
 
+        cached_results = find_results(search_text)
+
+    # Draw search text
     text_obj.draw(screen, (
         search_pos[0] + constants.UI_GAP*2,
         search_pos[1] + constants.UI_GAP*2))
+    
+    # Draw search results
+    for i, row in enumerate(cached_results[:6]):
+        render_row(
+            screen=screen,
+            row=row,
+            y_pos=i * (constants.UI_SLOT_HEIGHT + constants.UI_GAP*2) + 2*constants.UI_SLOT_HEIGHT)
 
 
 def do_keypress(key):
@@ -77,6 +99,25 @@ def do_keypress(key):
         search_text += char
 
 
+def find_results(text):
+    if len(text) < 1: return []
+
+    results = []
+
+    for result, ingredients in game.craft.crafting_dict.items():
+        ing_name_a = game.item.item_dict[ingredients[0]]['name']
+        ing_name_b = game.item.item_dict[ingredients[1]]['name']
+        result_name = game.item.item_dict[result]['name']
+
+        if text in result_name.upper() or text in ing_name_a.upper() or text in ing_name_b.upper():
+            results.append((
+                game.item.get_img(ingredients[0]),
+                game.item.get_img(ingredients[1]),
+                game.item.get_img(result)))
+    
+    return results
+
+
 def get_char(key):
     if key == pygame.K_SPACE:
         return ' '
@@ -89,3 +130,16 @@ def get_char(key):
 
     else:
         return None
+
+
+def render_row(screen, row, y_pos):
+    global plus
+    global equals
+
+    ing_a, ing_b, result = row
+
+    screen.blit(ing_a, (constants.UI_SLOT_HEIGHT, y_pos))
+    screen.blit(plus, (constants.RESOLUTION[0] // 4 + constants.UI_SLOT_HEIGHT // 2, y_pos))
+    screen.blit(ing_b, ((constants.RESOLUTION[0] - constants.UI_SLOT_HEIGHT) // 2, y_pos))
+    screen.blit(equals, (3*constants.RESOLUTION[0] // 4 - constants.UI_SLOT_HEIGHT, y_pos))
+    screen.blit(result, (constants.RESOLUTION[0] - constants.UI_SLOT_HEIGHT*2, y_pos))
