@@ -38,7 +38,7 @@ def init():
 
     global btn_back
     back_text = draw.text.Text('Back', TEXT_SIZE)
-    btn_back = draw.button.Text_Button(
+    btn_back = draw.button.TextButton(
         text_surf=back_text,
         pos=(
             constants.RESOLUTION[0] // 4,

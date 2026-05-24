@@ -83,7 +83,7 @@ class ImageButton(Button):
         surf.blit(image_to_draw, self.pos)
 
 
-class Text_Button(Button):
+class TextButton(Button):
     def __init__(self, text_surf, pos, size, event, context):
         """Construct a textbutton element.
 
