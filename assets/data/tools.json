@@ -3,5 +3,6 @@
     ["freezer", 5],
     ["ice_crusher", -1],
     ["kiln", 5],
+    ["magic_kiln", -1],
     ["wand", -1]
 ]
